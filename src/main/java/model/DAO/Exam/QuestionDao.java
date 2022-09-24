@@ -1,11 +1,13 @@
-package model.dao.Exam;
+package model.DAO.Exam;
 
-import model.dao.GenericDao;
+import model.DAO.GenericDao;
 import model.entity.Exam.Exam;
-import model.entity.Exam.GradedExam;
+import model.entity.Exam.ExamToTake;
 import model.entity.Exam.Question;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class QuestionDao extends GenericDao<Question>
 {
@@ -38,6 +40,18 @@ public class QuestionDao extends GenericDao<Question>
     public Question find(Long questionID)
     {
         return super.find(Question.class, questionID);
+    }
+
+    public ArrayList<Question> findAllByExamID(Long examID)
+    {
+        ArrayList<Question> questions = new ArrayList<>();
+
+        List list = super.findAll(String.format(
+                        "SELECT * FROM Question WHERE examID = %d", examID),
+                Question.class);
+        for (Object obj : list) if (obj instanceof Question) questions.add((Question) obj);
+
+        return questions;
     }
 
     public void update(Question question)

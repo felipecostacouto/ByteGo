@@ -13,7 +13,7 @@ public class Exam
     @Column(name = "name", nullable = false, length = 100)
     private String name;
     @Column(name = "timeToDeliverInSeconds", nullable = false)
-    private int timeToDeliverInSeconds ;
+    private int timeToDeliverInSeconds;
     @Column(name = "closedQuestionsAmount", nullable = false)
     private int closedQuestionsAmount;
     @Column(name = "openQuestionsAmount", nullable = false)

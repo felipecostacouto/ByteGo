@@ -1,4 +1,4 @@
-package model.service.view;
+package view.view;
 
 import com.sun.net.httpserver.HttpHandler;
 

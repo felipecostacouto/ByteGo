@@ -1,14 +1,5 @@
 package view;
 
-import model.service.PersonService;
-import model.service.view.HttpView;
-import view.URL.URLParameters;
-
-import java.io.OutputStream;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 public class PersonView
 {
 //    PersonService personService;

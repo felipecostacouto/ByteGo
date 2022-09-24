@@ -1,6 +1,6 @@
-package model.dao.Class;
+package model.DAO.Class;
 
-import model.dao.GenericDao;
+import model.DAO.GenericDao;
 import model.entity.Class.ClassProfessors;
 import model.entity.Class.ClassProfessorsPK;
 import model.entity.Class.ClassSubject;

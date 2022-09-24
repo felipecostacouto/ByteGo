@@ -1,6 +1,6 @@
-package model.dao.User;
+package model.DAO.User;
 
-import model.dao.GenericDao;
+import model.DAO.GenericDao;
 import model.entity.User.SystemUser;
 
 import java.util.Arrays;

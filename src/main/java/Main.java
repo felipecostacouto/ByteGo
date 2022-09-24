@@ -1,12 +1,9 @@
-import model.dao.Exam.DoneExamDao;
-import model.dao.Exam.ExamDao;
-import model.dao.Exam.ExamToTakeDao;
-import model.dao.Exam.QuestionDao;
-import model.entity.Exam.Question;
-import model.entity.Management.ADMOperation;
+import Utilities.JSON;
+import model.DAO.Exam.ExamToGradeDao;
+import model.DAO.Exam.ExamToTakeDao;
+import model.entity.Exam.ExamToTake;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class Main
 {
@@ -41,8 +38,13 @@ public class Main
 //        examToTake.setLimitDate(new Timestamp(123123L));
 //        new ExamToTakeDao().update(examToTake);
         //new QuestionDao().create(1L, "seja x tal que x < 1 sen", null, 2);
-        Question question = new QuestionDao().find(1L);
-        question.setDifficulty(123);
-        new QuestionDao().update(question);
+//        Question question = new QuestionDao().find(1L);
+//        question.setDifficulty(123);
+//        new QuestionDao().update(question);
+
+        ArrayList<ExamToTake> arrayList = new ExamToTakeDao().findAllByStudent("aluno1@hotmail.com");
+        System.out.println(arrayList.get(0).getStudent().getStudentPK().getStudentLogin());
+        System.out.println(arrayList.get(0).getExamToTakePK().getExamID());
+        System.out.println(arrayList.get(0).getLimitDate());
     }
 }

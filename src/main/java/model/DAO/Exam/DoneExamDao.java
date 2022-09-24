@@ -1,11 +1,15 @@
-package model.dao.Exam;
+package model.DAO.Exam;
 
-import model.dao.GenericDao;
+import model.DAO.GenericDao;
 import model.entity.Exam.DoneExam;
 import model.entity.Exam.DoneExamPK;
 import model.entity.Exam.Exam;
+import model.entity.Exam.ExamToTake;
 import model.entity.User.Student;
 import model.entity.User.StudentPK;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DoneExamDao extends GenericDao<DoneExam>
 {
@@ -41,6 +45,18 @@ public class DoneExamDao extends GenericDao<DoneExam>
     public DoneExam find(Long examID)
     {
         return super.find(DoneExam.class, new DoneExamPK(examID));
+    }
+
+    public ArrayList<DoneExam> findAllByStudent(String studentLogin)
+    {
+        ArrayList<DoneExam> exams = new ArrayList<>();
+
+        List<?> list = super.findAll(String.format(
+                "SELECT * FROM DoneExam WHERE doneExamStudentLogin = '%s'", studentLogin),
+                DoneExam.class);
+        for (Object obj : list) if (obj instanceof DoneExam) exams.add((DoneExam) obj);
+
+        return exams;
     }
 
     public void update(DoneExam doneExam)

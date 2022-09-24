@@ -1,14 +1,16 @@
-package model.dao.Exam;
+package model.DAO.Exam;
 
-import model.dao.GenericDao;
+import model.DAO.GenericDao;
+import model.entity.Exam.DoneExam;
 import model.entity.Exam.Exam;
-import model.entity.Exam.ExamToTake;
 import model.entity.Exam.GradedExam;
 import model.entity.Exam.GradedExamPK;
 import model.entity.User.Professor;
 import model.entity.User.ProfessorPK;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GradedExamDao extends GenericDao<GradedExam>
 {
@@ -43,6 +45,18 @@ public class GradedExamDao extends GenericDao<GradedExam>
     public GradedExam find(Long examID)
     {
         return super.find(GradedExam.class, new GradedExamPK(examID));
+    }
+
+    public ArrayList<GradedExam> findAllByProfessor(String professorLogin)
+    {
+        ArrayList<GradedExam> exams = new ArrayList<>();
+
+        List<?> list = super.findAll(String.format(
+                "SELECT * FROM GradedExam WHERE gradedExamProfessorLogin = '%s'", professorLogin),
+                GradedExam.class);
+        for (Object obj : list) if (obj instanceof GradedExam) exams.add((GradedExam) obj);
+
+        return exams;
     }
 
     public void update(GradedExam gradedExam)

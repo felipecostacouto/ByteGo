@@ -1,7 +1,6 @@
-package model.dao.Management;
+package model.DAO.Management;
 
-import model.dao.GenericDao;
-import model.entity.Exam.Exam;
+import model.DAO.GenericDao;
 import model.entity.Management.ADMOperation;
 import model.entity.Management.UserManageHistory;
 import model.entity.User.Administrator;

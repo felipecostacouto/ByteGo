@@ -1,11 +1,13 @@
-package model.dao;
+package model.DAO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
 import model.Database.DataBaseAccess;
 import model.Database.EntityManagerFactorySingleton;
 
 import java.sql.*;
+import java.util.List;
 
 public abstract class GenericDao<T>
 {
@@ -45,6 +47,16 @@ public abstract class GenericDao<T>
         entityManager.getTransaction().commit();
         entityManager.clear();
         return entityFound;
+    }
+
+    protected List<?> findAll(String sqlQuery, Class<T> entityClass)
+    {
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+        Query query = entityManager.createNativeQuery(sqlQuery, entityClass);
+        entityManager.getTransaction().commit();
+        entityManager.clear();
+        return query.getResultList();
     }
 
     protected void update(String updateQuery)

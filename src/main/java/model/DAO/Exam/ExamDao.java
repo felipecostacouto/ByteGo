@@ -1,6 +1,6 @@
-package model.dao.Exam;
+package model.DAO.Exam;
 
-import model.dao.GenericDao;
+import model.DAO.GenericDao;
 import model.entity.Exam.Exam;
 
 public class ExamDao extends GenericDao<Exam>
