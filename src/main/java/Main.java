@@ -1,6 +1,8 @@
 import Utilities.JSON;
+import controller.LoginController;
 import model.DAO.Exam.ExamToGradeDao;
 import model.DAO.Exam.ExamToTakeDao;
+import model.DTO.UserDTO;
 import model.entity.Exam.ExamToTake;
 
 import java.util.ArrayList;
@@ -42,9 +44,5 @@ public class Main
 //        question.setDifficulty(123);
 //        new QuestionDao().update(question);
 
-        ArrayList<ExamToTake> arrayList = new ExamToTakeDao().findAllByStudent("aluno1@hotmail.com");
-        System.out.println(arrayList.get(0).getStudent().getStudentPK().getStudentLogin());
-        System.out.println(arrayList.get(0).getExamToTakePK().getExamID());
-        System.out.println(arrayList.get(0).getLimitDate());
     }
 }

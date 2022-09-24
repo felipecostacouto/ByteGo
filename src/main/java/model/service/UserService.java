@@ -3,6 +3,7 @@ package model.service;
 import model.DAO.Exam.ExamDao;
 import model.DAO.Exam.ExamToTakeDao;
 import model.DAO.Exam.QuestionDao;
+import model.DAO.User.SystemUserDao;
 import model.DTO.ExamDTO;
 import model.DTO.QuestionDTO;
 import model.DTO.UserDTO;
@@ -15,6 +16,7 @@ import model.entity.Exam.Question;
 import model.entity.User.Administrator;
 import model.entity.User.Professor;
 import model.entity.User.Student;
+import model.entity.User.SystemUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,7 @@ public class UserService
     private String name;
     private String login;
     private String password;
+    private byte[] imageProfile;
     private boolean isPasswordCorrect = false;
 
     public UserService(String login, String password)
@@ -33,11 +36,33 @@ public class UserService
         this.password = password;
     }
 
+    public UserService(String login, String password, byte[] imageProfile, String name)
+    {
+        this(login, password);
+        this.imageProfile = imageProfile;
+        this.name = name;
+    }
+
     public UserDTO getUserDTO()
     {
+        // Talvez mandar uma exception?
         if (!userFound()) return new UserDTO(null, null, null, null, null);
         if (!isPasswordCorrect) return new UserDTO(null, login, null, null, null);
         return new UserDTO(name, login, userType, getExams(), password);
+    }
+
+    public UserDTO createNewUser()
+    {
+        if (!userFound())
+        {
+            new SystemUserDao().create(login, password, imageProfile);
+            new StudentDao().create(login, password);
+            return new UserDTO(name, login, "Student", null, password);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private boolean userFound()
@@ -90,11 +115,13 @@ public class UserService
         {
             exams.addAll(examService.getExamToTakeDTOByStudent(login));
             exams.addAll(examService.getDoneExamDTOByStudent(login));
-        } else if (userType.equals("Professor"))
+        }
+        else if (userType.equals("Professor"))
         {
             exams.addAll(examService.getExamToGradeDTOByProfessor(login));
             exams.addAll(examService.getGradedExamDTOByProfessor(login));
-        } else
+        }
+        else
         {
             exams.addAll(examService.getExamToTakeDTOByStudent(login));
             exams.addAll(examService.getDoneExamDTOByStudent(login));
