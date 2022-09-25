@@ -1,4 +1,4 @@
-package Network;
+package network;
 
 import java.net.URI;
 import java.util.HashMap;
