@@ -2,7 +2,6 @@ package Network;
 
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
-import view.view.HttpView;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -42,9 +41,9 @@ public class Server
         }
     }
 
-    public void addResponseForPath(List<HttpView> responses)
+    public void addResponseForPath(List<HTTPView> responses)
     {
-        for (HttpView httpView : responses)
+        for (HTTPView httpView : responses)
         {
             httpServer.createContext(httpView.getPath(), httpView.getHttpHandler());
         }

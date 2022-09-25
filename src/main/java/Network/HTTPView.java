@@ -1,13 +1,13 @@
-package view.view;
+package Network;
 
 import com.sun.net.httpserver.HttpHandler;
 
-public class HttpView
+public class HTTPView
 {
     private final String path;
     private final HttpHandler httpHandler;
 
-    public HttpView(String path, HttpHandler httpHandler)
+    public HTTPView(String path, HttpHandler httpHandler)
     {
         this.path = path;
         this.httpHandler = httpHandler;
