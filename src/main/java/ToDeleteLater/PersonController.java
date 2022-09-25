@@ -1,6 +1,4 @@
-package controller;
-
-import model.service.PersonService;
+package ToDeleteLater;
 
 public class PersonController implements IPersonController
 {

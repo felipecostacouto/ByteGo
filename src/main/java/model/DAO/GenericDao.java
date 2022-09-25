@@ -3,8 +3,8 @@ package model.DAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
-import model.Database.DataBaseAccess;
-import model.Database.EntityManagerFactorySingleton;
+import ToDeleteLater.DataBaseAccess;
+import model.EntityManagerFactorySingleton;
 
 import java.sql.*;
 import java.util.List;
