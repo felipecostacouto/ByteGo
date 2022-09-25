@@ -14,7 +14,7 @@ public class LoginController implements LoginInterface
     @Override
     public void register(String username, String password, byte[] imageProfile, String name)
     {
-        UserService userService = new UserService(username, password);
+        UserService userService = new UserService(username, password, imageProfile, name);
         sendUserDataToView(userService.createNewUser());
     }
 

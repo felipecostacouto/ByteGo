@@ -1,12 +1,3 @@
-import Utilities.JSON;
-import controller.LoginController;
-import model.DAO.Exam.ExamToGradeDao;
-import model.DAO.Exam.ExamToTakeDao;
-import model.DTO.UserDTO;
-import model.entity.Exam.ExamToTake;
-
-import java.util.ArrayList;
-
 public class Main
 {
     public static void main(String[] args)
