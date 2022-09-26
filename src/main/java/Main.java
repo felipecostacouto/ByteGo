@@ -1,3 +1,5 @@
+import controller.LoginController;
+
 public class Main
 {
     public static void main(String[] args)
@@ -34,6 +36,9 @@ public class Main
 //        Question question = new QuestionDao().find(1L);
 //        question.setDifficulty(123);
 //        new QuestionDao().update(question);
+
+        LoginController loginController = new LoginController();
+        loginController.login("fabriciokashino@live.com", "pass123");
 
     }
 }

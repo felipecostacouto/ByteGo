@@ -20,6 +20,6 @@ public class LoginController implements LoginInterface
 
     private void sendUserDataToView(UserDTO userDTO)
     {
-
+        System.out.println(userDTO);
     }
 }

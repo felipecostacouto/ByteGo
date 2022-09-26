@@ -28,4 +28,25 @@ public class ExamDTO
         this.specificExamDTO = specificExamDTO;
         this.questions = questions;
     }
+
+    public String getPrintExamInfo(int numberOfTags)
+    {
+        String tagsSpace = "";
+        for (int i = 0; i < numberOfTags; i++) tagsSpace = tagsSpace.concat("\t");
+        String specificExamInfo = specificExamDTO.getPrintSpecificExamInfo(numberOfTags + 2);
+        String questionsPrints = "";
+        if (questions != null) {
+            for (QuestionDTO questionDTO : questions) questionsPrints = questionsPrints.concat(questionDTO.getPrintQuestionInfo(numberOfTags + 2));
+        }
+
+        return "\n" + tagsSpace + "ExamDTO{" +
+                "\n" + tagsSpace + "\tID=" + ID +
+                ", \n" + tagsSpace + "\tname='" + name + '\'' +
+                ", \n" + tagsSpace + "\ttimeToDeliverInSeconds=" + timeToDeliverInSeconds +
+                ", \n" + tagsSpace + "\tclosedQuestionsAmount=" + closedQuestionsAmount +
+                ", \n" + tagsSpace + "\topenQuestionsAmount=" + openQuestionsAmount +
+                ", \n" + tagsSpace + "\tspecificExamDTO=" + specificExamInfo +
+                ", \n" + tagsSpace + "\tquestions=" + questionsPrints +
+                "}";
+    }
 }

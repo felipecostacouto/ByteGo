@@ -48,7 +48,7 @@ public class UserService
         if (!userFound())
         {
             new SystemUserDao().create(login, password, imageProfile);
-            new StudentDao().create(login, password);
+            new StudentDao().create(login, name);
             return new UserDTO(name, login, UserType.STUDENT, null, password);
         }
         else
@@ -59,11 +59,12 @@ public class UserService
 
     private boolean userFound()
     {
+        SystemUserDao systemUserDao = new SystemUserDao();
         Student student = new StudentDao().find(login);
 
         if (student != null)
         {
-            isPasswordCorrect = student.getSystemUser().getPassword().equals(password);
+            isPasswordCorrect = systemUserDao.find(student.getStudentPK().getStudentLogin()).getPassword().equals(password);
             name = student.getName();
             userType = UserType.STUDENT;
             return true;
@@ -74,7 +75,7 @@ public class UserService
 
             if (professor != null)
             {
-                isPasswordCorrect = professor.getSystemUser().getPassword().equals(password);
+                isPasswordCorrect = systemUserDao.find(professor.getProfessorPK().getProfessorLogin()).getPassword().equals(password);
                 name = professor.getName();
                 userType = UserType.PROFESSOR;
                 return true;
@@ -85,7 +86,7 @@ public class UserService
 
                 if (administrator != null)
                 {
-                    isPasswordCorrect = administrator.getSystemUser().getPassword().equals(password);
+                    isPasswordCorrect = systemUserDao.find(administrator.getAdministratorPK().getADMlogin()).getPassword().equals(password);
                     name = administrator.getName();
                     userType = UserType.ADMINISTRATOR;
                     return true;

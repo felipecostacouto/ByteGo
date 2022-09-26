@@ -1,5 +1,7 @@
 package model.DTO;
 
+import java.util.Arrays;
+
 public class QuestionDTO
 {
     public Long questionID;
@@ -25,5 +27,21 @@ public class QuestionDTO
         this.answerText = answerText;
         this.answerImage = answerImage;
         this.professorComments = professorComments;
+    }
+
+    public String getPrintQuestionInfo(int numberOfTags)
+    {
+        String tagsSpace = "";
+        for (int i = 0; i < numberOfTags; i++) tagsSpace = tagsSpace.concat("\t");
+
+        return "\n" + tagsSpace + "QuestionDTO{" +
+                ",\n" + tagsSpace + "\tquestionID=" + questionID +
+                ",\n" + tagsSpace + "\tstatement='" + statement + '\'' +
+                ",\n" + tagsSpace + "\tstatementImage=" + Arrays.toString(statementImage) +
+                ",\n" + tagsSpace + "\tdifficulty=" + difficulty +
+                ",\n" + tagsSpace + "\tanswerText='" + answerText + '\'' +
+                ",\n" + tagsSpace + "\tanswerImage=" + Arrays.toString(answerImage) +
+                ",\n" + tagsSpace + "\tprofessorComments='" + professorComments + '\'' +
+                '}';
     }
 }

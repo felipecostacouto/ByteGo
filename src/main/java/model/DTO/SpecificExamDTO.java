@@ -24,4 +24,16 @@ public class SpecificExamDTO
         this.limitDateToTake = limitDateToTake;
         this.gradedTime = gradedTime;
     }
+
+    public String getPrintSpecificExamInfo(int numberOfTags)
+    {
+        String tagsSpace = "";
+        for (int i = 0; i < numberOfTags; i++) tagsSpace = tagsSpace.concat("\t");
+
+        return "\n" + tagsSpace + "examType=" + examType +
+                ",\n" + tagsSpace + "score=" + score +
+                ",\n" + tagsSpace + "openQuestionsGraded=" + openQuestionsGraded +
+                ",\n" + tagsSpace + "limitDateToTake=" + limitDateToTake +
+                ",\n" + tagsSpace + "gradedTime=" + gradedTime;
+    }
 }
