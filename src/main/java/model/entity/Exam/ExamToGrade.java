@@ -35,7 +35,7 @@ public class ExamToGrade implements SpecificExamInterface
 
     @Override
     public SpecificExamDTO getSpecificExamDTO() {
-        return new SpecificExamDTO("ExamToGrade", 0, openQuestionsGraded, null, null);
+        return new SpecificExamDTO(ExamType.EXAM_TO_GRADE, 0, openQuestionsGraded, null, null);
     }
 
     public int getOpenQuestionsGraded() {

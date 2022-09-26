@@ -47,7 +47,7 @@ public class GradedExam implements SpecificExamInterface
     @Override
     public SpecificExamDTO getSpecificExamDTO() {
         // Aqui, -1 significa que foram todas. Será um problema?
-        return new SpecificExamDTO("GradedExam", score, -1, null, gradedTime);
+        return new SpecificExamDTO(ExamType.GRADED_EXAM, score, -1, null, gradedTime);
     }
 
     public GradedExamPK getGradedExamPK() {

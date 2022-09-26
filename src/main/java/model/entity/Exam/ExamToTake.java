@@ -37,7 +37,7 @@ public class ExamToTake implements SpecificExamInterface
 
     @Override
     public SpecificExamDTO getSpecificExamDTO() {
-        return new SpecificExamDTO("ExamToTake",0, 0, limitDate, null);
+        return new SpecificExamDTO(ExamType.EXAM_TO_TAKE,0, 0, limitDate, null);
     }
 
     public Timestamp getLimitDate() {

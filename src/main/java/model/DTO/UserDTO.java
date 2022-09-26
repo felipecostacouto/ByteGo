@@ -1,18 +1,20 @@
 package model.DTO;
 
+import model.entity.User.UserType;
+
 import java.util.ArrayList;
 
 public class UserDTO
 {
     public String name;
     public String login;
-    public String userType;
+    public UserType userType;
     public ArrayList<ExamDTO> exams;
     public String password;
 
     public UserDTO(String name,
                    String login,
-                   String userType,
+                   UserType userType,
                    ArrayList<ExamDTO> exams,
                    String password)
     {

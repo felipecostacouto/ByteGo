@@ -9,12 +9,13 @@ import model.DAO.User.StudentDao;
 import model.entity.User.Administrator;
 import model.entity.User.Professor;
 import model.entity.User.Student;
+import model.entity.User.UserType;
 
 import java.util.ArrayList;
 
 public class UserService
 {
-    private String userType;
+    private UserType userType;
     private String name;
     private String login;
     private String password;
@@ -48,7 +49,7 @@ public class UserService
         {
             new SystemUserDao().create(login, password, imageProfile);
             new StudentDao().create(login, password);
-            return new UserDTO(name, login, "Student", null, password);
+            return new UserDTO(name, login, UserType.STUDENT, null, password);
         }
         else
         {
@@ -64,7 +65,7 @@ public class UserService
         {
             isPasswordCorrect = student.getSystemUser().getPassword().equals(password);
             name = student.getName();
-            userType = "Student";
+            userType = UserType.STUDENT;
             return true;
         }
         else
@@ -75,7 +76,7 @@ public class UserService
             {
                 isPasswordCorrect = professor.getSystemUser().getPassword().equals(password);
                 name = professor.getName();
-                userType = "Professor";
+                userType = UserType.PROFESSOR;
                 return true;
             }
             else
@@ -86,7 +87,7 @@ public class UserService
                 {
                     isPasswordCorrect = administrator.getSystemUser().getPassword().equals(password);
                     name = administrator.getName();
-                    userType = "Administrator";
+                    userType = UserType.ADMINISTRATOR;
                     return true;
                 }
                 else
@@ -102,9 +103,9 @@ public class UserService
         ArrayList<ExamDTO> exams = new ArrayList<>();
 
         switch (userType) {
-            case "Student" -> exams.addAll(new StudentService(login).getAllExamsDTO());
-            case "Professor" -> exams.addAll(new ProfessorService(login).getAllExamsDTO());
-            case "Administrator" -> exams.addAll(new AdministratorService(login).getAllExamsDTO());
+            case STUDENT -> exams.addAll(new StudentService(login).getAllExamsDTO());
+            case PROFESSOR -> exams.addAll(new ProfessorService(login).getAllExamsDTO());
+            case ADMINISTRATOR -> exams.addAll(new AdministratorService(login).getAllExamsDTO());
         }
 
         return exams;
