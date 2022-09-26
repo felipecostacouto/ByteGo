@@ -3,7 +3,9 @@ package model.DAO.User;
 import model.DAO.GenericDao;
 import model.entity.User.SystemUser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SystemUserDao extends GenericDao<SystemUser>
 {
@@ -31,6 +33,14 @@ public class SystemUserDao extends GenericDao<SystemUser>
 
     public SystemUser find(String userLogin) {
         return super.find(SystemUser.class, userLogin);
+    }
+
+    public ArrayList<SystemUser> findAll()
+    {
+        ArrayList<SystemUser> users = new ArrayList<>();
+        List<?> list = super.findAll("SELECT * FROM SystemUser", SystemUser.class);
+        for (Object obj : list) if (obj instanceof SystemUser) users.add((SystemUser) obj);
+        return users;
     }
 
     public void update(SystemUser systemUser) {

@@ -1,13 +1,14 @@
 package model.entity.Exam;
 
 import jakarta.persistence.*;
+import model.DTO.SpecificExamDTO;
 import model.entity.User.Student;
 
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "ExamToTake")
-public class ExamToTake
+public class ExamToTake implements ExamInterface
 {
     @EmbeddedId
     private ExamToTakePK examToTakePK;
@@ -27,6 +28,16 @@ public class ExamToTake
         this.examToTakePK = examToTakePK;
         this.student = student;
         this.limitDate = limitDate;
+    }
+
+    @Override
+    public Long getID() {
+        return examToTakePK.getExamID();
+    }
+
+    @Override
+    public SpecificExamDTO getSpecificExamDTO() {
+        return new SpecificExamDTO("ExamToTake",0, 0, limitDate, null);
     }
 
     public Timestamp getLimitDate() {

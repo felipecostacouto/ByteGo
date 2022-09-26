@@ -1,11 +1,12 @@
 package model.entity.Exam;
 
 import jakarta.persistence.*;
+import model.DTO.SpecificExamDTO;
 import model.entity.User.Professor;
 
 @Entity
 @Table(name = "ExamToGrade")
-public class ExamToGrade
+public class ExamToGrade implements ExamInterface
 {
     @EmbeddedId
     private ExamToGradePK examToGradePK;
@@ -25,6 +26,16 @@ public class ExamToGrade
         this.examToGradePK = examToGradePK;
         this.professor = professor;
         this.openQuestionsGraded = openQuestionsGraded;
+    }
+
+    @Override
+    public Long getID() {
+        return examToGradePK.getExamID();
+    }
+
+    @Override
+    public SpecificExamDTO getSpecificExamDTO() {
+        return new SpecificExamDTO("ExamToGrade", 0, openQuestionsGraded, null, null);
     }
 
     public int getOpenQuestionsGraded() {

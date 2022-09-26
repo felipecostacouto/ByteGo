@@ -1,17 +1,14 @@
 package model.DAO.Exam;
 
 import model.DAO.GenericDao;
-import model.entity.Exam.Exam;
-import model.entity.Exam.ExamToGrade;
-import model.entity.Exam.ExamToGradePK;
-import model.entity.Exam.ExamToTake;
+import model.entity.Exam.*;
 import model.entity.User.Professor;
 import model.entity.User.ProfessorPK;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExamToGradeDao extends GenericDao<ExamToGrade>
+public class ExamToGradeDao extends GenericDao<ExamToGrade> implements ExamDaoInterface
 {
     public void create(Long examID, String professorLogin, int openQuestionsGraded)
     {
@@ -47,16 +44,21 @@ public class ExamToGradeDao extends GenericDao<ExamToGrade>
         return super.find(ExamToGrade.class, new ExamToGradePK(examID));
     }
 
-    public ArrayList<ExamToGrade> findAllByProfessor(String professorLogin)
-    {
-        ArrayList<ExamToGrade> exams = new ArrayList<>();
+    @Override
+    public ArrayList<ExamInterface> findAllExamByUserLogin(String login) {
+        ArrayList<ExamInterface> exams = new ArrayList<>();
 
         List<?> list = super.findAll(String.format(
-                "SELECT * FROM ExamToGrade WHERE examToGradeProfessorLogin = '%s'", professorLogin),
+                        "SELECT * FROM ExamToGrade WHERE examToGradeProfessorLogin = '%s'", login),
                 ExamToGrade.class);
         for (Object obj : list) if (obj instanceof ExamToGrade) exams.add((ExamToGrade) obj);
 
         return exams;
+    }
+
+    @Override
+    public Exam findParentExamByID(Long examID) {
+        return new ExamDao().find(examID);
     }
 
     public void update(ExamToGrade examToGrade)

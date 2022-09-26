@@ -16,7 +16,8 @@ public class QuestionDTO
                        int difficulty,
                        String answerText,
                        byte[] answerImage,
-                       String professorComments) {
+                       String professorComments)
+    {
         this.questionID = questionID;
         this.statement = statement;
         this.statementImage = statementImage;

@@ -1,13 +1,15 @@
 package model.entity.Exam;
 
 import jakarta.persistence.*;
+import model.DTO.SpecificExamDTO;
 import model.entity.User.Professor;
+import model.entity.User.Student;
 
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "GradedExam")
-public class GradedExam
+public class GradedExam implements ExamInterface
 {
     @EmbeddedId
     private GradedExamPK gradedExamPK;
@@ -18,15 +20,34 @@ public class GradedExam
     @ManyToOne
     @JoinColumn(name = "gradedExamProfessorLogin")
     private Professor professor;
+    @ManyToOne
+    @JoinColumn(name = "doneExamStudentLogin")
+    private Student student;
     @Column(name = "gradedTime", nullable = false)
     private Timestamp gradedTime;
+    @Column(name = "score", nullable = false, updatable = false)
+    private Float score;
 
     public GradedExam() {}
 
-    public GradedExam(GradedExamPK gradedExamPK, Professor professor, Timestamp gradedTime) {
+
+    public GradedExam(GradedExamPK gradedExamPK, Professor professor, Student student, Timestamp gradedTime, Float score) {
         this.gradedExamPK = gradedExamPK;
         this.professor = professor;
+        this.student = student;
         this.gradedTime = gradedTime;
+        this.score = score;
+    }
+
+    @Override
+    public Long getID() {
+        return gradedExamPK.getExamID();
+    }
+
+    @Override
+    public SpecificExamDTO getSpecificExamDTO() {
+        // Aqui, -1 significa que foram todas. Será um problema?
+        return new SpecificExamDTO("GradedExam", score, -1, null, gradedTime);
     }
 
     public GradedExamPK getGradedExamPK() {
@@ -53,11 +74,27 @@ public class GradedExam
         this.professor = professor;
     }
 
-    public Timestamp getGradeTime() {
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Timestamp getGradedTime() {
         return gradedTime;
     }
 
-    public void setGradeTime(Timestamp gradeTime) {
-        this.gradedTime = gradeTime;
+    public void setGradedTime(Timestamp gradedTime) {
+        this.gradedTime = gradedTime;
+    }
+
+    public Float getScore() {
+        return score;
+    }
+
+    public void setScore(Float score) {
+        this.score = score;
     }
 }

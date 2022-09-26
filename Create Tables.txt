@@ -77,16 +77,6 @@ CREATE TABLE UserManageHistory(
 	FOREIGN KEY(historyADMLogin) REFERENCES Administrator(ADMlogin)
 );
 
-CREATE TABLE DoneExam(
-	examID SERIAL NOT NULL,
-	doneExamStudentLogin VARCHAR(40) NOT NULL,
-	score DECIMAL(5, 2) NOT NULL,
-	PRIMARY KEY(examID),
-	FOREIGN KEY(examID) REFERENCES Exam(ID),
-	FOREIGN KEY(doneExamStudentLogin) REFERENCES Student(studentLogin)
-	ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 CREATE TABLE ExamToTake(
 	examToTakeStudentLogin VARCHAR(40) NOT NULL,
 	examID SERIAL NOT NULL,
@@ -99,11 +89,14 @@ CREATE TABLE ExamToTake(
 
 CREATE TABLE GradedExam(
 	examID SERIAL NOT NULL,
+	doneExamStudentLogin VARCHAR(40) NOT NULL,
 	gradedExamProfessorLogin VARCHAR(40) NOT NULL,
 	gradedTime TIMESTAMP NOT NULL,
+	score DECIMAL(5, 2) NOT NULL,
 	PRIMARY KEY(examID),
 	FOREIGN KEY(examID) REFERENCES Exam(ID),
-	FOREIGN KEY(gradedExamProfessorLogin) REFERENCES Professor(professorLogin)
+	FOREIGN KEY(gradedExamProfessorLogin) REFERENCES Professor(professorLogin),
+	FOREIGN KEY(doneExamStudentLogin) REFERENCES Student(studentLogin)
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
 

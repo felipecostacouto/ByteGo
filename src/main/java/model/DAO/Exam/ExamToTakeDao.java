@@ -2,6 +2,7 @@ package model.DAO.Exam;
 
 import model.DAO.GenericDao;
 import model.entity.Exam.Exam;
+import model.entity.Exam.ExamInterface;
 import model.entity.Exam.ExamToTake;
 import model.entity.Exam.ExamToTakePK;
 import model.entity.User.Student;
@@ -11,7 +12,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExamToTakeDao extends GenericDao<ExamToTake>
+public class ExamToTakeDao extends GenericDao<ExamToTake> implements ExamDaoInterface
 {
     public void create(Long examID, String studentLogin, Timestamp limitDate)
     {
@@ -47,16 +48,21 @@ public class ExamToTakeDao extends GenericDao<ExamToTake>
         return super.find(ExamToTake.class, new ExamToTakePK(examID));
     }
 
-    public ArrayList<ExamToTake> findAllByStudent(String studentLogin)
-    {
-        ArrayList<ExamToTake> exams = new ArrayList<>();
+    @Override
+    public ArrayList<ExamInterface> findAllExamByUserLogin(String login) {
+        ArrayList<ExamInterface> exams = new ArrayList<>();
 
         List<?> list = super.findAll(String.format(
-                "SELECT * FROM ExamToTake WHERE examToTakeStudentLogin = '%s'", studentLogin),
+                        "SELECT * FROM ExamToTake WHERE examToTakeStudentLogin = '%s'", login),
                 ExamToTake.class);
         for (Object obj : list) if (obj instanceof ExamToTake) exams.add((ExamToTake) obj);
 
         return exams;
+    }
+
+    @Override
+    public Exam findParentExamByID(Long examID) {
+        return new ExamDao().find(examID);
     }
 
     public void update(ExamToTake examToTake)
