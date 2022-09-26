@@ -2,7 +2,7 @@ package model.DAO.Exam;
 
 import model.DAO.GenericDao;
 import model.entity.Exam.Exam;
-import model.entity.Exam.ExamInterface;
+import model.entity.Exam.SpecificExamInterface;
 import model.entity.Exam.ExamToTake;
 import model.entity.Exam.ExamToTakePK;
 import model.entity.User.Student;
@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExamToTakeDao extends GenericDao<ExamToTake> implements ExamDaoInterface
+public class ExamToTakeDao extends GenericDao<ExamToTake> implements SpecificExamDaoInterface
 {
     public void create(Long examID, String studentLogin, Timestamp limitDate)
     {
@@ -49,8 +49,8 @@ public class ExamToTakeDao extends GenericDao<ExamToTake> implements ExamDaoInte
     }
 
     @Override
-    public ArrayList<ExamInterface> findAllExamByUserLogin(String login) {
-        ArrayList<ExamInterface> exams = new ArrayList<>();
+    public ArrayList<SpecificExamInterface> findAllExamByUserLogin(String login) {
+        ArrayList<SpecificExamInterface> exams = new ArrayList<>();
 
         List<?> list = super.findAll(String.format(
                         "SELECT * FROM ExamToTake WHERE examToTakeStudentLogin = '%s'", login),

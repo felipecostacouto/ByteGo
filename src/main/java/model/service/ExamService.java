@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class ExamService
 {
-    ExamDaoInterface examDao;
+    SpecificExamDaoInterface examDao;
     QuestionService questionService = new QuestionService();
 
-    public ExamService(ExamDaoInterface examDao)
+    public ExamService(SpecificExamDaoInterface examDao)
     {
         this.examDao = examDao;
     }
@@ -21,7 +21,7 @@ public class ExamService
     {
         ArrayList<ExamDTO> examsDTOs = new ArrayList<>();
 
-        for (ExamInterface exam : examDao.findAllExamByUserLogin(login))
+        for (SpecificExamInterface exam : examDao.findAllExamByUserLogin(login))
         {
             Exam parentExam = examDao.findParentExamByID(exam.getID());
             ArrayList<QuestionDTO> questions = questionService.getQuestionsDTOByExamID(parentExam.getID());

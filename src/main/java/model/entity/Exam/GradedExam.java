@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "GradedExam")
-public class GradedExam implements ExamInterface
+public class GradedExam implements SpecificExamInterface
 {
     @EmbeddedId
     private GradedExamPK gradedExamPK;

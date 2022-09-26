@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "ExamToTake")
-public class ExamToTake implements ExamInterface
+public class ExamToTake implements SpecificExamInterface
 {
     @EmbeddedId
     private ExamToTakePK examToTakePK;

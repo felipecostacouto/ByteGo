@@ -8,7 +8,7 @@ import model.entity.User.ProfessorPK;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExamToGradeDao extends GenericDao<ExamToGrade> implements ExamDaoInterface
+public class ExamToGradeDao extends GenericDao<ExamToGrade> implements SpecificExamDaoInterface
 {
     public void create(Long examID, String professorLogin, int openQuestionsGraded)
     {
@@ -45,8 +45,8 @@ public class ExamToGradeDao extends GenericDao<ExamToGrade> implements ExamDaoIn
     }
 
     @Override
-    public ArrayList<ExamInterface> findAllExamByUserLogin(String login) {
-        ArrayList<ExamInterface> exams = new ArrayList<>();
+    public ArrayList<SpecificExamInterface> findAllExamByUserLogin(String login) {
+        ArrayList<SpecificExamInterface> exams = new ArrayList<>();
 
         List<?> list = super.findAll(String.format(
                         "SELECT * FROM ExamToGrade WHERE examToGradeProfessorLogin = '%s'", login),

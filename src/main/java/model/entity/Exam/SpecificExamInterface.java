@@ -2,7 +2,7 @@ package model.entity.Exam;
 
 import model.DTO.SpecificExamDTO;
 
-public interface ExamInterface
+public interface SpecificExamInterface
 {
     Long getID();
 

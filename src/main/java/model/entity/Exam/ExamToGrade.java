@@ -6,7 +6,7 @@ import model.entity.User.Professor;
 
 @Entity
 @Table(name = "ExamToGrade")
-public class ExamToGrade implements ExamInterface
+public class ExamToGrade implements SpecificExamInterface
 {
     @EmbeddedId
     private ExamToGradePK examToGradePK;
