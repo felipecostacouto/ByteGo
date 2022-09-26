@@ -1,12 +1,12 @@
 package model.DAO.Exam;
 
 import model.DAO.GenericDao;
-import model.entity.Exam.Exam;
-import model.entity.Exam.SpecificExamInterface;
-import model.entity.Exam.ExamToTake;
-import model.entity.Exam.ExamToTakePK;
-import model.entity.User.Student;
-import model.entity.User.StudentPK;
+import model.entity.exam.Exam;
+import model.entity.exam.SpecificExamInterface;
+import model.entity.exam.ExamToTake;
+import model.entity.exam.ExamToTakePK;
+import model.entity.user.Student;
+import model.entity.user.StudentPK;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

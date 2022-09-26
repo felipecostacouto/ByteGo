@@ -1,9 +1,9 @@
-package model.entity.Exam;
+package model.entity.exam;
 
 import jakarta.persistence.*;
 import model.DTO.SpecificExamDTO;
-import model.entity.User.Professor;
-import model.entity.User.Student;
+import model.entity.user.Professor;
+import model.entity.user.Student;
 
 import java.sql.Timestamp;
 

@@ -1,9 +1,9 @@
 package model.DAO.Exam;
 
 import model.DAO.GenericDao;
-import model.entity.Exam.*;
-import model.entity.User.Professor;
-import model.entity.User.ProfessorPK;
+import model.entity.exam.*;
+import model.entity.user.Professor;
+import model.entity.user.ProfessorPK;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,7 @@ import model.DAO.Exam.ExamToTakeDao;
 import model.DAO.Exam.GradedExamDao;
 import model.DAO.User.SystemUserDao;
 import model.DTO.ExamDTO;
-import model.entity.User.SystemUser;
+import model.entity.user.SystemUser;
 
 import java.util.ArrayList;
 

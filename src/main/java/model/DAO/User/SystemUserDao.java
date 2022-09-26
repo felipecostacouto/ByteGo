@@ -1,7 +1,7 @@
 package model.DAO.User;
 
 import model.DAO.GenericDao;
-import model.entity.User.SystemUser;
+import model.entity.user.SystemUser;
 
 import java.util.ArrayList;
 import java.util.Arrays;

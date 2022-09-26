@@ -1,6 +1,6 @@
 package model.DTO;
 
-import model.entity.Exam.ExamType;
+import model.entity.exam.ExamType;
 
 import java.sql.Timestamp;
 

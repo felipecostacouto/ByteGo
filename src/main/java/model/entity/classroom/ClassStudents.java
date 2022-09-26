@@ -1,7 +1,7 @@
-package model.entity.Class;
+package model.entity.classroom;
 
 import jakarta.persistence.*;
-import model.entity.User.Student;
+import model.entity.user.Student;
 
 @Entity
 public class ClassStudents

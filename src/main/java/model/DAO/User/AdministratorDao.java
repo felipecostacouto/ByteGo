@@ -1,7 +1,7 @@
 package model.DAO.User;
 
 import model.DAO.GenericDao;
-import model.entity.User.*;
+import model.entity.user.*;
 
 public class AdministratorDao extends GenericDao<Administrator>
 {

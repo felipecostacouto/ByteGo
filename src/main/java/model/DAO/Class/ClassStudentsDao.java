@@ -1,11 +1,11 @@
 package model.DAO.Class;
 
 import model.DAO.GenericDao;
-import model.entity.Class.ClassStudents;
-import model.entity.Class.ClassStudentsPK;
-import model.entity.Class.ClassSubject;
-import model.entity.User.Student;
-import model.entity.User.StudentPK;
+import model.entity.classroom.ClassStudents;
+import model.entity.classroom.ClassStudentsPK;
+import model.entity.classroom.ClassSubject;
+import model.entity.user.Student;
+import model.entity.user.StudentPK;
 
 public class ClassStudentsDao extends GenericDao<ClassStudents>
 {

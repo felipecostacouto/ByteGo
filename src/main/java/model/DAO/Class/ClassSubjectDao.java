@@ -1,7 +1,7 @@
 package model.DAO.Class;
 
 import model.DAO.GenericDao;
-import model.entity.Class.ClassSubject;
+import model.entity.classroom.ClassSubject;
 
 public class ClassSubjectDao extends GenericDao<ClassSubject>
 {

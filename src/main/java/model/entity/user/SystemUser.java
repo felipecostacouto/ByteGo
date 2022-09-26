@@ -1,7 +1,6 @@
-package model.entity.User;
+package model.entity.user;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
 
 import static jakarta.persistence.InheritanceType.JOINED;
 

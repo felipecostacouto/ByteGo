@@ -1,4 +1,4 @@
-package model.entity.Management;
+package model.entity.management;
 
 public enum ADMOperation
 {

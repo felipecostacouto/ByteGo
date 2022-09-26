@@ -1,7 +1,7 @@
 package model.DAO.Exam;
 
 import model.DAO.GenericDao;
-import model.entity.Exam.Exam;
+import model.entity.exam.Exam;
 
 public class ExamDao extends GenericDao<Exam>
 {

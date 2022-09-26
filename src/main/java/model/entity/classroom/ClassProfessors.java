@@ -1,7 +1,7 @@
-package model.entity.Class;
+package model.entity.classroom;
 
 import jakarta.persistence.*;
-import model.entity.User.Professor;
+import model.entity.user.Professor;
 
 @Entity
 @Table(name = "ClassProfessors")

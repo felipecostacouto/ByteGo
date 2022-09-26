@@ -1,4 +1,4 @@
-package model.entity.Exam;
+package model.entity.exam;
 
 import model.DTO.SpecificExamDTO;
 

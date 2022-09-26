@@ -1,7 +1,7 @@
 package model.DAO.Exam;
 
-import model.entity.Exam.Exam;
-import model.entity.Exam.SpecificExamInterface;
+import model.entity.exam.Exam;
+import model.entity.exam.SpecificExamInterface;
 
 import java.util.ArrayList;
 

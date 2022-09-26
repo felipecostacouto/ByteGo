@@ -1,17 +1,17 @@
-package model.entity.Exam;
+package model.entity.exam;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public class ExamToTakePK
+public class GradedExamPK
 {
     @Column(name = "examID")
     private Long examID;
 
-    public ExamToTakePK() {}
+    public GradedExamPK() {}
 
-    public ExamToTakePK(Long examID) {
+    public GradedExamPK(Long examID) {
         this.examID = examID;
     }
 

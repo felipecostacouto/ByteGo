@@ -1,4 +1,4 @@
-package model.entity.Exam;
+package model.entity.exam;
 
 public enum ExamType
 {

@@ -1,6 +1,6 @@
 package model.DTO;
 
-import model.entity.User.UserType;
+import model.entity.user.UserType;
 
 import java.util.ArrayList;
 

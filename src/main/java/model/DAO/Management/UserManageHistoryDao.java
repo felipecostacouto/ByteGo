@@ -1,11 +1,11 @@
 package model.DAO.Management;
 
 import model.DAO.GenericDao;
-import model.entity.Management.ADMOperation;
-import model.entity.Management.UserManageHistory;
-import model.entity.User.Administrator;
-import model.entity.User.AdministratorPK;
-import model.entity.User.SystemUser;
+import model.entity.management.ADMOperation;
+import model.entity.management.UserManageHistory;
+import model.entity.user.Administrator;
+import model.entity.user.AdministratorPK;
+import model.entity.user.SystemUser;
 
 import java.sql.Timestamp;
 

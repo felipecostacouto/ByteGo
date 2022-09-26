@@ -3,7 +3,7 @@ package model.service;
 import model.DAO.Exam.*;
 import model.DTO.ExamDTO;
 import model.DTO.QuestionDTO;
-import model.entity.Exam.*;
+import model.entity.exam.*;
 
 import java.util.ArrayList;
 

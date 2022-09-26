@@ -1,9 +1,9 @@
 package model.DAO.User;
 
 import model.DAO.GenericDao;
-import model.entity.User.Student;
-import model.entity.User.StudentPK;
-import model.entity.User.SystemUser;
+import model.entity.user.Student;
+import model.entity.user.StudentPK;
+import model.entity.user.SystemUser;
 
 public class StudentDao extends GenericDao<Student>
 {

@@ -6,10 +6,10 @@ import model.DTO.UserDTO;
 import model.DAO.User.AdministratorDao;
 import model.DAO.User.ProfessorDao;
 import model.DAO.User.StudentDao;
-import model.entity.User.Administrator;
-import model.entity.User.Professor;
-import model.entity.User.Student;
-import model.entity.User.UserType;
+import model.entity.user.Administrator;
+import model.entity.user.Professor;
+import model.entity.user.Student;
+import model.entity.user.UserType;
 
 import java.util.ArrayList;
 
@@ -17,8 +17,8 @@ public class UserService
 {
     private UserType userType;
     private String name;
-    private String login;
-    private String password;
+    private final String login;
+    private final String password;
     private byte[] imageProfile;
     private boolean isPasswordCorrect = false;
 
