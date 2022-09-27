@@ -1,6 +1,5 @@
 package model.entity.exam;
 
-
 import jakarta.persistence.*;
 
 @Entity
@@ -19,36 +18,36 @@ public class Question
     private byte[] statementImage;
     @Column(name = "difficulty", nullable = false)
     private int difficulty;
-    @Column(name = "answerText")
-    private String answerText;
-    @Column(name = "answerImage")
-    private byte[] answerImage;
+    @Column(name = "studentAnswer")
+    private String studentAnswer;
+    @Column(name = "studentAnswerImage")
+    private byte[] studentAnswerImage;
+    @Column(name = "correctAnswer")
+    private String correctAnswer;
+    @Column(name = "correctAnswerImage")
+    private byte[] correctAnswerImage;
     @Column(name = "professorComments", length = 500)
     private String professorComments;
+    @Column(name = "score", nullable = false, updatable = false)
+    private Float score;
 
     public Question() {}
 
-    public Question(Exam exam, String statement, byte[] statementImage, int difficulty) {
+    public Question(Exam exam, String statement, byte[] statementImage, int difficulty, String correctAnswer, byte[] correctAnswerImage) {
         this.exam = exam;
         this.statement = statement;
         this.statementImage = statementImage;
         this.difficulty = difficulty;
-    }
-
-    public String getProfessorComments() {
-        return professorComments;
-    }
-
-    public void setProfessorComments(String professorComments) {
-        this.professorComments = professorComments;
+        this.correctAnswer = correctAnswer;
+        this.correctAnswerImage = correctAnswerImage;
     }
 
     public Exam getExam() {
         return exam;
     }
 
-    public void setExam(Exam examID) {
-        this.exam = examID;
+    public void setExam(Exam exam) {
+        this.exam = exam;
     }
 
     public Long getQuestionID() {
@@ -83,19 +82,51 @@ public class Question
         this.difficulty = difficulty;
     }
 
-    public String getAnswerText() {
-        return answerText;
+    public String getStudentAnswer() {
+        return studentAnswer;
     }
 
-    public void setAnswerText(String answerText) {
-        this.answerText = answerText;
+    public void setStudentAnswer(String studentAnswer) {
+        this.studentAnswer = studentAnswer;
     }
 
-    public byte[] getAnswerImage() {
-        return answerImage;
+    public byte[] getStudentAnswerImage() {
+        return studentAnswerImage;
     }
 
-    public void setAnswerImage(byte[] answerImage) {
-        this.answerImage = answerImage;
+    public void setStudentAnswerImage(byte[] studentAnswerImage) {
+        this.studentAnswerImage = studentAnswerImage;
+    }
+
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public byte[] getCorrectAnswerImage() {
+        return correctAnswerImage;
+    }
+
+    public void setCorrectAnswerImage(byte[] correctAnswerImage) {
+        this.correctAnswerImage = correctAnswerImage;
+    }
+
+    public String getProfessorComments() {
+        return professorComments;
+    }
+
+    public void setProfessorComments(String professorComments) {
+        this.professorComments = professorComments;
+    }
+
+    public Float getScore() {
+        return score;
+    }
+
+    public void setScore(Float score) {
+        this.score = score;
     }
 }

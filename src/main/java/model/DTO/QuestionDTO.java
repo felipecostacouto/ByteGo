@@ -1,5 +1,7 @@
 package model.DTO;
 
+import jakarta.persistence.Column;
+
 import java.util.Arrays;
 
 public class QuestionDTO
@@ -8,25 +10,34 @@ public class QuestionDTO
     public String statement;
     public byte[] statementImage;
     public int difficulty;
-    public String answerText;
-    public byte[] answerImage;
+    public String studentAnswer;
+    public byte[] studentAnswerImage;
+    public String correctAnswer;
+    public byte[] correctAnswerImage;
     public String professorComments;
+    public Float score;
 
     public QuestionDTO(Long questionID,
                        String statement,
                        byte[] statementImage,
                        int difficulty,
-                       String answerText,
-                       byte[] answerImage,
-                       String professorComments)
+                       String studentAnswer,
+                       byte[] studentAnswerImage,
+                       String correctAnswer,
+                       byte[] correctAnswerImage,
+                       String professorComments,
+                       Float score)
     {
         this.questionID = questionID;
         this.statement = statement;
         this.statementImage = statementImage;
         this.difficulty = difficulty;
-        this.answerText = answerText;
-        this.answerImage = answerImage;
+        this.studentAnswer = studentAnswer;
+        this.studentAnswerImage = studentAnswerImage;
+        this.correctAnswer = correctAnswer;
+        this.correctAnswerImage = correctAnswerImage;
         this.professorComments = professorComments;
+        this.score = score;
     }
 
     public String getPrintQuestionInfo(int numberOfTags)
@@ -39,9 +50,12 @@ public class QuestionDTO
                 ",\n" + tagsSpace + "\tstatement='" + statement + '\'' +
                 ",\n" + tagsSpace + "\tstatementImage=" + Arrays.toString(statementImage) +
                 ",\n" + tagsSpace + "\tdifficulty=" + difficulty +
-                ",\n" + tagsSpace + "\tanswerText='" + answerText + '\'' +
-                ",\n" + tagsSpace + "\tanswerImage=" + Arrays.toString(answerImage) +
+                ",\n" + tagsSpace + "\tstudentAnswer='" + studentAnswer + '\'' +
+                ",\n" + tagsSpace + "\tstudentAnswerImage=" + Arrays.toString(studentAnswerImage) +
+                ",\n" + tagsSpace + "\tcorrectAnswer='" + correctAnswer + '\'' +
+                ",\n" + tagsSpace + "\tcorrectAnswerImage=" + Arrays.toString(correctAnswerImage) +
                 ",\n" + tagsSpace + "\tprofessorComments='" + professorComments + '\'' +
+                ",\n" + tagsSpace + "\tscore=" + score +
                 '}';
     }
 }

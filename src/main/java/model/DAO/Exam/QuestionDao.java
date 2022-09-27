@@ -10,12 +10,14 @@ import java.util.List;
 
 public class QuestionDao extends GenericDao<Question>
 {
-    public void create(Long examID, String statement, byte[] statementImage, int difficulty)
+    public void create(Long examID, String statement, byte[] statementImage, int difficulty, String correctAnswer, byte[] correctAnswerImage)
     {
         Question question = new Question();
         question.setStatement(statement);
         question.setStatementImage(statementImage);
         question.setDifficulty(difficulty);
+        question.setCorrectAnswer(correctAnswer);
+        question.setCorrectAnswerImage(correctAnswerImage);
         question.setExam(entityManager.getReference(Exam.class, examID));
         super.create(question);
     }
@@ -59,15 +61,21 @@ public class QuestionDao extends GenericDao<Question>
                         "statement = '%s', " +
                         "statementImage = '%s', " +
                         "difficulty = %d, " +
-                        "answerText = '%s', " +
-                        "answerImage = '%s', " +
-                        "professorComments = '%s' WHERE questionID = %d",
+                        "studentAnswer = '%s', " +
+                        "studentAnswerImage = '%s', " +
+                        "correctAnswer = '%s', " +
+                        "correctAnswerImage = '%s', " +
+                        "professorComments = '%s', " +
+                        "score = %.2f WHERE questionID = %d",
                 question.getStatement(),
                 Arrays.toString(question.getStatementImage()),
                 question.getDifficulty(),
-                question.getAnswerText(),
-                Arrays.toString(question.getAnswerImage()),
+                question.getStudentAnswer(),
+                Arrays.toString(question.getStudentAnswerImage()),
+                question.getCorrectAnswer(),
+                Arrays.toString(question.getCorrectAnswerImage()),
                 question.getProfessorComments(),
+                question.getScore(),
                 question.getQuestionID()));
     }
 }

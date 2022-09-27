@@ -38,7 +38,7 @@ public class Main
 //        new QuestionDao().update(question);
 
         LoginController loginController = new LoginController();
-        loginController.login("fabriciokashino@live.com", "pass123");
+        loginController.register("asfasdasd@hotmail.com", "fdsfkwe2342", null, "Anonimo");
 
     }
 }

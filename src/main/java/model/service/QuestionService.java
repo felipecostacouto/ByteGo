@@ -24,9 +24,12 @@ public class QuestionService
                     question.getStatement(),
                     question.getStatementImage(),
                     question.getDifficulty(),
-                    question.getAnswerText(),
-                    question.getAnswerImage(),
-                    question.getProfessorComments()));
+                    question.getStudentAnswer(),
+                    question.getStudentAnswerImage(),
+                    question.getCorrectAnswer(),
+                    question.getCorrectAnswerImage(),
+                    question.getProfessorComments(),
+                    question.getScore()));
         }
         
         return questions;

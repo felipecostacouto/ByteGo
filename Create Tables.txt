@@ -124,9 +124,12 @@ CREATE TABLE Question(
 	statement VARCHAR(500) NOT NULL,
 	statementImage BYTEA,
 	difficulty INTEGER NOT NULL,
-	answerText VARCHAR(500),
-	answerImage BYTEA,
+	studentAnswer VARCHAR(500),
+	studentAnswerImage BYTEA,
+	correctAnswer VARCHAR(500),
+    correctAnswerImage BYTEA,
 	professorComments VARCHAR(500),
+	score DECIMAL(5, 2) NOT NULL,
 	PRIMARY KEY(questionID),
 	FOREIGN KEY(examID) REFERENCES Exam(ID)
 	ON DELETE CASCADE ON UPDATE CASCADE
