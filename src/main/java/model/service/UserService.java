@@ -53,7 +53,7 @@ public class UserService
         }
         else
         {
-            return null;
+            return new UserDTO(null, null, null, null, null);
         }
     }
 

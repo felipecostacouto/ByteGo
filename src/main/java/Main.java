@@ -1,14 +1,14 @@
-import controller.LoginController;
 
 public class Main
 {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
 //        PersonView personView = new PersonView(new PersonService());
 
 //        Server server = new Server(InetAddress.getByName("localhost").getHostAddress(), 8888);
-//        server.addResponseForPath(personView.getHandlers());
+//        //server.addResponseForPath(personView.getHandlers());
 //        server.startListening();
+//        HttpServer httpServer = new HttpServer();
+//        httpServer.init();
 
 //        new SystemUserDao().create("fabriciokashino@live.com", "12345", null);
 //        new SystemUserDao().create("usuario@live.com", "12345", null);
@@ -37,8 +37,8 @@ public class Main
 //        question.setDifficulty(123);
 //        new QuestionDao().update(question);
 
-        LoginController loginController = new LoginController();
-        loginController.register("asfasdasd@hotmail.com", "fdsfkwe2342", null, "Anonimo");
+//        LoginController loginController = new LoginController();
+//        loginController.register("asfasdasd@hotmail.com", "fdsfkwe2342", null, "Anonimo");
 
     }
 }
