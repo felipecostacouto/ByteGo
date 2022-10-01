@@ -25,6 +25,26 @@ public class SpecificExamDTO
         this.gradedTime = gradedTime;
     }
 
+    public ExamType getExamType() {
+        return examType;
+    }
+
+    public float getScore() {
+        return score;
+    }
+
+    public int getOpenQuestionsGraded() {
+        return openQuestionsGraded;
+    }
+
+    public Timestamp getLimitDateToTake() {
+        return limitDateToTake;
+    }
+
+    public Timestamp getGradedTime() {
+        return gradedTime;
+    }
+
     public String getPrintSpecificExamInfo(int numberOfTags)
     {
         String tagsSpace = "";

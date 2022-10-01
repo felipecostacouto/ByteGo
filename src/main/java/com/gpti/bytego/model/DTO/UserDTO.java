@@ -3,6 +3,7 @@ package com.gpti.bytego.model.DTO;
 import com.gpti.bytego.model.entity.user.UserType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UserDTO
 {
@@ -23,6 +24,26 @@ public class UserDTO
         this.userType = userType;
         this.exams = exams;
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public ArrayList<ExamDTO> getExams() {
+        return exams;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     @Override

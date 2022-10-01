@@ -29,6 +29,34 @@ public class ExamDTO
         this.questions = questions;
     }
 
+    public Long getID() {
+        return ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getTimeToDeliverInSeconds() {
+        return timeToDeliverInSeconds;
+    }
+
+    public int getClosedQuestionsAmount() {
+        return closedQuestionsAmount;
+    }
+
+    public int getOpenQuestionsAmount() {
+        return openQuestionsAmount;
+    }
+
+    public SpecificExamDTO getSpecificExamDTO() {
+        return specificExamDTO;
+    }
+
+    public ArrayList<QuestionDTO> getQuestions() {
+        return questions;
+    }
+
     public String getPrintExamInfo(int numberOfTags)
     {
         String tagsSpace = "";

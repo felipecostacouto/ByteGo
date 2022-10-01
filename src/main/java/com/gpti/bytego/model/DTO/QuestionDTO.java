@@ -38,6 +38,46 @@ public class QuestionDTO
         this.score = score;
     }
 
+    public Long getQuestionID() {
+        return questionID;
+    }
+
+    public String getStatement() {
+        return statement;
+    }
+
+    public byte[] getStatementImage() {
+        return statementImage;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public String getStudentAnswer() {
+        return studentAnswer;
+    }
+
+    public byte[] getStudentAnswerImage() {
+        return studentAnswerImage;
+    }
+
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public byte[] getCorrectAnswerImage() {
+        return correctAnswerImage;
+    }
+
+    public String getProfessorComments() {
+        return professorComments;
+    }
+
+    public Float getScore() {
+        return score;
+    }
+
     public String getPrintQuestionInfo(int numberOfTags)
     {
         String tagsSpace = "";

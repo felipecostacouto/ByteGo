@@ -1,8 +1,10 @@
 package com.gpti.bytego.controller;
 
+import org.json.JSONObject;
+
 public interface LoginInterface
 {
-    String login(String username, String password);
+    JSONObject login(String username, String password);
 
-    void register(String username, String password, byte[] imageProfile, String name);
+    JSONObject register(String username, String password, byte[] imageProfile, String name);
 }
