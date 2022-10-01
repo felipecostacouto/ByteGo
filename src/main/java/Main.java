@@ -1,44 +1,13 @@
+import com.gpti.bytego.controller.LoginController;
 
 public class Main
 {
-    public static void main(String[] args) {
-//        PersonView personView = new PersonView(new PersonService());
-
-//        Server server = new Server(InetAddress.getByName("localhost").getHostAddress(), 8888);
-//        //server.addResponseForPath(personView.getHandlers());
-//        server.startListening();
-//        HttpServer httpServer = new HttpServer();
-//        httpServer.init();
-
-//        new SystemUserDao().create("fabriciokashino@live.com", "12345", null);
-//        new SystemUserDao().create("usuario@live.com", "12345", null);
-//        new AdministratorDao().create("fabriciokashino@live.com", "fabricio");
-
-//
-//        TableTestttDao tableTestttDao = new TableTestttDao();
-//        tableTestttDao.create("fabriciokashino@live.com");
-
-//        new ExamDao().create("Prova I", 1000, 6, 4);
-//        new ExamDao().create("Prova II", 1300, 2, 4);
-//        new SystemUserDao().create("aluno1@hotmail.com", "password1231", null);
-//        new SystemUserDao().create("aluno2@hotmail.com", "password1231", null);
-//        new SystemUserDao().create("aluno3@hotmail.com", "password1231", null);
-//        new SystemUserDao().create("aluno4@hotmail.com", "password1231", null);
-//        new SystemUserDao().create("aluno5@hotmail.com", "password1231", null);
-//        new StudentDao().create("aluno1@hotmail.com", "Fernando");
-//        new DoneExamDao().create(2L, "aluno1@hotmail.com", 12.23F);
-//        ExamToTake examToTake = new ExamToTakeDao().find(2L);
-//        System.out.println(examToTake.getLimitDate());
-//        System.out.println(examToTake.getStudent().getStudentPK().getStudentLogin());
-//        examToTake.setLimitDate(new Timestamp(123123L));
-//        new ExamToTakeDao().update(examToTake);
-        //new QuestionDao().create(1L, "seja x tal que x < 1 sen", null, 2);
-//        Question question = new QuestionDao().find(1L);
-//        question.setDifficulty(123);
-//        new QuestionDao().update(question);
-
-//        LoginController loginController = new LoginController();
-//        loginController.register("asfasdasd@hotmail.com", "fdsfkwe2342", null, "Anonimo");
-
+    public static void main(String[] args)
+    {
+        LoginController loginController = new LoginController();
+        loginController.register("fabriciokashino@live.com", "pass123", null, "Fabricio");
+        loginController.register("joao_pe_de_feijao@yahoo.com", "asda133", null, "João");
+        loginController.register("maria.florentina@hotmail.com", "f09fu21", null, "Maria");
+        loginController.register("acabou_jessica@gmail.com", "dfbt234", null, "Jessica");
     }
 }
