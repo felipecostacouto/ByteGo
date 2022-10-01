@@ -10,6 +10,7 @@ function loginSumitClicked() {
     var passwordText = document.getElementById("login_form_password").value;
     var url = 'http://localhost:8080/Login?username=' + loginText + '&password=' + passwordText;
 
+    my_text.textContent = "Executando requisição para servidor..."
     fetch(url, {
         method: "GET"
     }).then(function (response) {
