@@ -1,5 +1,6 @@
 package com.gpti.bytego.model.entity.exam;
 
+import com.gpti.bytego.model.entity.classroom.ClassSubject;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,14 +19,18 @@ public class Exam
     private int closedQuestionsAmount;
     @Column(name = "openQuestionsAmount", nullable = false)
     private int openQuestionsAmount;
+    @ManyToOne
+    @JoinColumn(name = "classSubjectID")
+    private ClassSubject classID;
 
     public Exam() {}
 
-    public Exam(String name, int timeToDeliverInSeconds, int closedQuestionsAmount, int openQuestionsAmount) {
+    public Exam(String name, int timeToDeliverInSeconds, int closedQuestionsAmount, int openQuestionsAmount, ClassSubject classID) {
         this.name = name;
         this.timeToDeliverInSeconds = timeToDeliverInSeconds;
         this.closedQuestionsAmount = closedQuestionsAmount;
         this.openQuestionsAmount = openQuestionsAmount;
+        this.classID = classID;
     }
 
     public Long getID() {
@@ -66,5 +71,13 @@ public class Exam
 
     public void setOpenQuestionsAmount(int openQuestionsAmount) {
         this.openQuestionsAmount = openQuestionsAmount;
+    }
+
+    public ClassSubject getClassID() {
+        return classID;
+    }
+
+    public void setClassID(ClassSubject classID) {
+        this.classID = classID;
     }
 }

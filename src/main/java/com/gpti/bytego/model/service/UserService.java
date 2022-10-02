@@ -1,52 +1,41 @@
 package com.gpti.bytego.model.service;
 
-
 import com.gpti.bytego.model.DAO.User.AdministratorDao;
 import com.gpti.bytego.model.DAO.User.ProfessorDao;
 import com.gpti.bytego.model.DAO.User.StudentDao;
 import com.gpti.bytego.model.DAO.User.SystemUserDao;
-import com.gpti.bytego.model.DTO.ExamDTO;
+import com.gpti.bytego.model.DTO.ClassDTO;
 import com.gpti.bytego.model.DTO.UserDTO;
-import com.gpti.bytego.model.entity.user.Administrator;
-import com.gpti.bytego.model.entity.user.Professor;
-import com.gpti.bytego.model.entity.user.Student;
-import com.gpti.bytego.model.entity.user.UserType;
+import com.gpti.bytego.model.entity.user.*;
 
 import java.util.ArrayList;
 
 public class UserService
 {
-    private UserType userType;
-    private String name;
-    private final String login;
-    private final String password;
-    private byte[] imageProfile;
-    private boolean isPasswordCorrect = false;
-
-    public UserService(String login, String password)
+    public UserDTO getUserDTO(String login, String password)
     {
-        this.login = login;
-        this.password = password;
+        User user = findUser(login);
+
+        if (user != null)
+        {
+            if (isPasswordCorrect(login, password))
+            {
+                return new UserDTO(user.getName(), login, user.getUserType(), getClasses(login, user.getUserType()), password);
+            }
+            else
+            {
+                return new UserDTO(null, login, null, null, null);
+            }
+        }
+
+        return new UserDTO(null, null, null, null, null);
     }
 
-    public UserService(String login, String password, byte[] imageProfile, String name)
+    public UserDTO createNewUser(String login, String password, byte[] imageProfile, String name)
     {
-        this(login, password);
-        this.imageProfile = imageProfile;
-        this.name = name;
-    }
+        User user = findUser(login);
 
-    public UserDTO getUserDTO()
-    {
-        // Talvez mandar uma exception?
-        if (!userFound()) return new UserDTO(null, null, null, null, null);
-        if (!isPasswordCorrect) return new UserDTO(null, login, null, null, null);
-        return new UserDTO(name, login, userType, getExams(), password);
-    }
-
-    public UserDTO createNewUser()
-    {
-        if (!userFound())
+        if (user == null)
         {
             new SystemUserDao().create(login, password, imageProfile);
             new StudentDao().create(login, name);
@@ -58,58 +47,32 @@ public class UserService
         }
     }
 
-    private boolean userFound()
+    private User findUser(String username)
     {
-        SystemUserDao systemUserDao = new SystemUserDao();
-        Student student = new StudentDao().find(login);
+        StudentDao studentDao = new StudentDao();
+        ProfessorDao professorDao = new ProfessorDao();
+        AdministratorDao administratorDao = new AdministratorDao();
 
-        if (student != null)
-        {
-            isPasswordCorrect = systemUserDao.find(student.getStudentPK().getStudentLogin()).getPassword().equals(password);
-            name = student.getName();
-            userType = UserType.STUDENT;
-            return true;
-        }
-        else
-        {
-            Professor professor = new ProfessorDao().find(login);
+        User user = studentDao.find(username);
 
-            if (professor != null)
-            {
-                isPasswordCorrect = systemUserDao.find(professor.getProfessorPK().getProfessorLogin()).getPassword().equals(password);
-                name = professor.getName();
-                userType = UserType.PROFESSOR;
-                return true;
-            }
-            else
-            {
-                Administrator administrator = new AdministratorDao().find(login);
+        if (user == null) {
+            user = professorDao.find(username);
 
-                if (administrator != null)
-                {
-                    isPasswordCorrect = systemUserDao.find(administrator.getAdministratorPK().getADMlogin()).getPassword().equals(password);
-                    name = administrator.getName();
-                    userType = UserType.ADMINISTRATOR;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+            if (user == null) {
+                user = administratorDao.find(username);
             }
         }
+
+        return user;
     }
 
-    private ArrayList<ExamDTO> getExams()
+    private boolean isPasswordCorrect(String username, String password)
     {
-        ArrayList<ExamDTO> exams = new ArrayList<>();
+        return new SystemUserDao().find(username).getPassword().equals(password);
+    }
 
-        switch (userType) {
-            case STUDENT -> exams.addAll(new StudentService(login).getAllExamsDTO());
-            case PROFESSOR -> exams.addAll(new ProfessorService(login).getAllExamsDTO());
-            case ADMINISTRATOR -> exams.addAll(new AdministratorService(login).getAllExamsDTO());
-        }
-
-        return exams;
+    private ArrayList<ClassDTO> getClasses(String username, UserType userType)
+    {
+        return new ClassService().getClassesByUser(username, userType);
     }
 }

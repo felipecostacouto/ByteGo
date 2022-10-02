@@ -3,9 +3,14 @@ package com.gpti.bytego.model.entity.user;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Embeddable
-public class AdministratorPK
+public class AdministratorPK implements Serializable
 {
+    @Serial
+    private static final long serialVersionUID = 7655900918079697474L;
     @Column(name = "ADMlogin")
     private String ADMlogin;
 

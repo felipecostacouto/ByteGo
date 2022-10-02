@@ -9,5 +9,7 @@ public class Main
         loginController.register("joao_pe_de_feijao@yahoo.com", "asda133", null, "João");
         loginController.register("maria.florentina@hotmail.com", "f09fu21", null, "Maria");
         loginController.register("acabou_jessica@gmail.com", "dfbt234", null, "Jessica");
+
+        System.out.println(loginController.login("fabriciokashino@live.com", "pass123"));
     }
 }

@@ -3,9 +3,15 @@ package com.gpti.bytego.model.entity.user;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.ArrayList;
+
 @Embeddable
-public class StudentPK
+public class StudentPK implements Serializable
 {
+    @Serial
+    private static final long serialVersionUID = 2102820096288701596L;
     @Column(name = "studentLogin")
     private String studentLogin;
 

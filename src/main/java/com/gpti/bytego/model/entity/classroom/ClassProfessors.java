@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "ClassProfessors")
-public class ClassProfessors
+public class ClassProfessors implements ClassroomIndicator
 {
     @EmbeddedId
     private ClassProfessorsPK classProfessorsPK;
@@ -40,6 +40,7 @@ public class ClassProfessors
         this.professor = professor;
     }
 
+    @Override
     public ClassSubject getClassSubject() {
         return classSubject;
     }

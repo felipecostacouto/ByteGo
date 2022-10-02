@@ -5,10 +5,14 @@ import com.gpti.bytego.model.DAO.GenericDao;
 import com.gpti.bytego.model.entity.classroom.ClassStudents;
 import com.gpti.bytego.model.entity.classroom.ClassStudentsPK;
 import com.gpti.bytego.model.entity.classroom.ClassSubject;
+import com.gpti.bytego.model.entity.classroom.ClassroomIndicator;
 import com.gpti.bytego.model.entity.user.Student;
 import com.gpti.bytego.model.entity.user.StudentPK;
 
-public class ClassStudentsDao extends GenericDao<ClassStudents>
+import java.util.ArrayList;
+import java.util.List;
+
+public class ClassStudentsDao extends GenericDao<ClassStudents> implements ClassDao
 {
     public void create(String classID, String classStudentLogin)
     {
@@ -42,6 +46,46 @@ public class ClassStudentsDao extends GenericDao<ClassStudents>
     public ClassStudents find(ClassStudents classStudents)
     {
         return super.find(ClassStudents.class, classStudents.getClassStudentsPK());
+    }
+
+    public ArrayList<ClassStudents> findAllByStudent(String classStudentLogin)
+    {
+        ArrayList<ClassStudents> classes = new ArrayList<>();
+
+        List<?> list = super.findAll(String.format(
+                        "SELECT * FROM ClassStudents WHERE classStudentLogin = '%s'", classStudentLogin),
+                ClassStudents.class);
+        for (Object obj : list)
+        {
+            if (obj instanceof ClassStudents)
+            {
+                ClassSubject classSubject = new ClassSubjectDao().find(((ClassStudents) obj).getClassStudentsPK().getClassID());
+                ((ClassStudents) obj).setClassSubject(classSubject);
+                classes.add((ClassStudents) obj);
+            }
+        }
+
+        return classes;
+    }
+
+    @Override
+    public ArrayList<ClassroomIndicator> findAllByUser(String username) {
+        ArrayList<ClassroomIndicator> classes = new ArrayList<>();
+
+        List<?> list = super.findAll(String.format(
+                        "SELECT * FROM ClassStudents WHERE classStudentLogin = '%s'", username),
+                ClassStudents.class);
+        for (Object obj : list)
+        {
+            if (obj instanceof ClassStudents)
+            {
+                ClassSubject classSubject = new ClassSubjectDao().find(((ClassStudents) obj).getClassStudentsPK().getClassID());
+                ((ClassStudents) obj).setClassSubject(classSubject);
+                classes.add((ClassStudents) obj);
+            }
+        }
+
+        return classes;
     }
 
     public void update(ClassStudents classStudents) {

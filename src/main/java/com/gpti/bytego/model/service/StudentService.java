@@ -1,13 +1,12 @@
 package com.gpti.bytego.model.service;
 
-
 import com.gpti.bytego.model.DAO.Exam.ExamToTakeDao;
 import com.gpti.bytego.model.DAO.Exam.GradedExamDao;
 import com.gpti.bytego.model.DTO.ExamDTO;
 
 import java.util.ArrayList;
 
-public class StudentService
+public class StudentService implements SpecificUserService
 {
     private final String login;
     private final ExamService examToTakeService = new ExamService(new ExamToTakeDao());
@@ -18,6 +17,7 @@ public class StudentService
         this.login = login;
     }
 
+    @Override
     public ArrayList<ExamDTO> getAllExamsDTO()
     {
         ArrayList<ExamDTO> exams = new ArrayList<>();
