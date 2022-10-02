@@ -6,14 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import com.gpti.bytego.controller.LoginController;
-import com.gpti.bytego.controller.LoginInterface;
 
 @WebServlet(value = "/Login")
 public class LoginServlet extends HttpServlet
 {
-    private final LoginInterface loginController = new LoginController();
+    private final LoginController loginController = new LoginController();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {

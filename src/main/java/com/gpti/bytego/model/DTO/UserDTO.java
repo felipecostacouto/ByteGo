@@ -3,26 +3,25 @@ package com.gpti.bytego.model.DTO;
 import com.gpti.bytego.model.entity.user.UserType;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class UserDTO
 {
     public String name;
     public String login;
     public UserType userType;
-    public ArrayList<ExamDTO> exams;
+    public ArrayList<ClassDTO> classes;
     public String password;
 
     public UserDTO(String name,
                    String login,
                    UserType userType,
-                   ArrayList<ExamDTO> exams,
+                   ArrayList<ClassDTO> classes,
                    String password)
     {
         this.name = name;
         this.login = login;
         this.userType = userType;
-        this.exams = exams;
+        this.classes = classes;
         this.password = password;
     }
 
@@ -38,8 +37,8 @@ public class UserDTO
         return userType;
     }
 
-    public ArrayList<ExamDTO> getExams() {
-        return exams;
+    public ArrayList<ClassDTO> getClasses() {
+        return classes;
     }
 
     public String getPassword() {
@@ -48,15 +47,16 @@ public class UserDTO
 
     @Override
     public String toString() {
-        String examsPrints = "";
-        if (exams != null) {
-            for (ExamDTO examDTO : exams) examsPrints = examsPrints.concat(examDTO.getPrintExamInfo(2));
+        String classesPrints = "";
+        if (classes != null) {
+            for (ClassDTO classDTO : classes) classesPrints = classesPrints.concat(classDTO.getPrintExamInfo(2));
         }
+
         return "UserDTO{" +
                 "\n\tname='" + name + '\'' +
                 ", \n\tlogin='" + login + '\'' +
                 ", \n\tuserType=" + userType +
-                ", \n\texams=" + examsPrints +
+                ", \n\tclasses=" + classesPrints +
                 ", \n\tpassword='" + password + '\'' +
                 "\n}";
     }

@@ -6,6 +6,7 @@ import com.gpti.bytego.model.entity.user.SystemUser;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 @Entity
 public class UserManageHistory

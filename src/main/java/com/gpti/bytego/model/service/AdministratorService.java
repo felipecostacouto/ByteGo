@@ -9,7 +9,7 @@ import com.gpti.bytego.model.entity.user.SystemUser;
 
 import java.util.ArrayList;
 
-public class AdministratorService
+public class AdministratorService implements SpecificUserService
 {
     private final String login;
 
@@ -18,6 +18,7 @@ public class AdministratorService
         this.login = login;
     }
 
+    @Override
     public ArrayList<ExamDTO> getAllExamsDTO()
     {
         ArrayList<ExamDTO> exams = new ArrayList<>();

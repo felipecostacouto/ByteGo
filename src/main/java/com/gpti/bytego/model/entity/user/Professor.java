@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Professor")
-public class Professor
+public class Professor implements User
 {
     @EmbeddedId
     private ProfessorPK professorPK;
@@ -38,11 +38,17 @@ public class Professor
         this.systemUser = systemUser;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public UserType getUserType() {
+        return UserType.PROFESSOR;
     }
 }

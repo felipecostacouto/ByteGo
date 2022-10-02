@@ -1,12 +1,20 @@
 CREATE SCHEMA TakingTest;
 SET search_path TO TakingTest;
 
+CREATE TABLE ClassSubject(
+	classSubjectID VARCHAR(70) NOT NULL,
+	subject VARCHAR(100) NOT NULL,
+	PRIMARY KEY(classSubjectID)
+);
+
 CREATE TABLE Exam(
 	ID SERIAL NOT NULL,
 	name VARCHAR(100) NOT NULL,
 	timeToDeliverInSeconds INTEGER NOT NULL,	
 	closedQuestionsAmount INTEGER NOT NULL,
 	openQuestionsAmount INTEGER NOT NULL,
+	classID VARCHAR(70) NOT NULL,
+	FOREIGN KEY(classID) REFERENCES ClassSubject(classSubjectID),
 	PRIMARY KEY(ID)
 );
 
@@ -33,16 +41,9 @@ CREATE TABLE Professor(
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE ClassSubject(
-	classSubjectID VARCHAR(20) NOT NULL,
-	subject VARCHAR(100) NOT NULL,
-	PRIMARY KEY(classSubjectID)
-);
-
-
 CREATE TABLE ClassStudents(
 	classStudentLogin VARCHAR(50) NOT NULL,
-	classID VARCHAR(20) NOT NULL,
+	classID VARCHAR(70) NOT NULL,
 	PRIMARY KEY(classStudentlogin, classID),
 	FOREIGN KEY(classStudentlogin) REFERENCES Student(studentLogin),
 	FOREIGN KEY(classID) REFERENCES ClassSubject(classSubjectID)
@@ -51,7 +52,7 @@ CREATE TABLE ClassStudents(
 
 CREATE TABLE ClassProfessors(
 	classProfessorLogin VARCHAR(50) NOT NULL,
-	classID VARCHAR(20) NOT NULL,
+	classID VARCHAR(70) NOT NULL,
 	PRIMARY KEY(classProfessorLogin, classID),
 	FOREIGN KEY(classProfessorLogin) REFERENCES Professor(professorLogin),
 	FOREIGN KEY(classID) REFERENCES ClassSubject(classSubjectID)

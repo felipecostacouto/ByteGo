@@ -3,9 +3,12 @@ package com.gpti.bytego.model.entity.classroom;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 @Embeddable
-public class ClassStudentsPK
-{
+public class ClassStudentsPK implements Serializable {
+    private static final long serialVersionUID = 5621075355468497658L;
     @Column(name = "classStudentLogin", nullable = false, length = 50)
     private String classStudentLogin;
     @Column(name = "classID", nullable = false, length = 20)
