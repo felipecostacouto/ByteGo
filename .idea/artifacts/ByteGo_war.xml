@@ -9,7 +9,7 @@
         <unpackNestedArchives>false</unpackNestedArchives>
       </options>
     </properties>
-    <root id="archive" name="ByteGo-1.0-SNAPSHOT.war">
+    <root id="archive" name="ByteGo.war">
       <element id="artifact" artifact-name="ByteGo:war exploded" />
     </root>
   </artifact>
