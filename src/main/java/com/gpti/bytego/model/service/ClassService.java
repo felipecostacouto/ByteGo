@@ -2,11 +2,9 @@ package com.gpti.bytego.model.service;
 
 import com.gpti.bytego.model.DAO.Class.ClassDao;
 import com.gpti.bytego.model.DAO.Class.ClassProfessorsDao;
-import com.gpti.bytego.model.DAO.Class.ClassStudentsDao;
 import com.gpti.bytego.model.DAO.Class.ClassSubjectDao;
 import com.gpti.bytego.model.DAO.User.ProfessorDao;
 import com.gpti.bytego.model.DTO.ClassDTO;
-import com.gpti.bytego.model.entity.classroom.ClassProfessors;
 import com.gpti.bytego.model.entity.classroom.ClassroomIndicator;
 import com.gpti.bytego.model.entity.user.UserType;
 
@@ -31,7 +29,7 @@ public class ClassService
     public ArrayList<ClassDTO> getClassesByUser(String username, UserType userType)
     {
         ArrayList<ClassDTO> classDTOs = new ArrayList<>();
-        ClassDao classDao = new ClassProfessorsDao();
+        ClassDao classDao = UserTypeMapper.getClassDaoByUserType(userType);
 
         for (ClassroomIndicator classFound : classDao.findAllByUser(username))
         {

@@ -1,5 +1,6 @@
 package com.gpti.bytego.servlets;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,5 +25,12 @@ public class LoginServlet extends HttpServlet
 
         PrintWriter out = resp.getWriter();
         out.println(loginController.login(username, password));
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
+
+
     }
 }
