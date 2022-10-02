@@ -1,22 +1,15 @@
 package com.gpti.bytego.model.DAO;
 
-import com.gpti.bytego.ToDeleteLater.DataBaseAccess;
 import com.gpti.bytego.model.EntityManagerFactorySingleton;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 public abstract class GenericDao<T>
 {
     protected final EntityManager entityManager = EntityManagerFactorySingleton.getInstance().createEntityManager();
-    private final DataBaseAccess dataBaseAccess = new DataBaseAccess();
-    private Connection connection;
 
     protected void create(Object register)
     {
@@ -80,42 +73,5 @@ public abstract class GenericDao<T>
             return true;
         }
         return false;
-    }
-
-    public ResultSet find(String SQLQuery, Object... params)
-    {
-        return executeSQLQuery(SQLQuery, params);
-    }
-
-    private ResultSet executeSQLQuery(String SQLQuery, Object... params)
-    {
-        try {
-            PreparedStatement preparedStatement = getStatement(SQLQuery, params);
-            boolean doesExistResult = preparedStatement.execute();
-            ResultSet resultSet = null;
-
-            if (doesExistResult) resultSet = preparedStatement.getResultSet();
-            else preparedStatement.close();
-
-            connection.close();
-            return resultSet;
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private PreparedStatement getStatement(String SQLQuery, Object... params) throws SQLException
-    {
-        connection = dataBaseAccess.connect();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQLQuery);
-        for (int i = 0; i < params.length; i++) {
-            assert preparedStatement != null;
-            preparedStatement.setObject(i + 1, params[i]);
-        }
-
-        return preparedStatement;
     }
 }
