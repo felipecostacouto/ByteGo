@@ -1,7 +1,7 @@
 package com.gpti.bytego.model.service;
 
 import com.gpti.bytego.model.DAO.Class.ClassProfessorsDao;
-import com.gpti.bytego.model.DAO.Exam.ExamToTakeDao;
+import com.gpti.bytego.model.DAO.Exam.ExamToGradeDao;
 import com.gpti.bytego.model.DAO.Exam.GradedExamDao;
 import com.gpti.bytego.model.DTO.ExamDTO;
 import com.gpti.bytego.model.entity.classroom.ClassProfessors;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ProfessorService implements SpecificUserService
 {
     private final String login;
-    private final ExamService examToTakeService = new ExamService(new ExamToTakeDao());
+    private final ExamService examToGradeService = new ExamService(new ExamToGradeDao());
     private final ExamService gradedExamService = new ExamService(new GradedExamDao());
 
     public ProfessorService(String login)
@@ -23,7 +23,7 @@ public class ProfessorService implements SpecificUserService
     public ArrayList<ExamDTO> getAllExamsDTO()
     {
         ArrayList<ExamDTO> exams = new ArrayList<>();
-        exams.addAll(examToTakeService.getAllExamDTOsByUserLogin(login));
+        exams.addAll(examToGradeService.getAllExamDTOsByUserLogin(login));
         exams.addAll(gradedExamService.getAllExamDTOsByUserLogin(login));
         return exams;
     }
