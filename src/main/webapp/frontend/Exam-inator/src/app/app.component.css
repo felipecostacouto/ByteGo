@@ -1,0 +1,27 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  .span-title{
+    font-family: "Fredericka the Great";
+    color:white;
+  }
+  .example-sidenav-content {
+    display: flex;
+    height: 100%;
+  }
+  
+  .example-sidenav {
+    padding: 20px;
+  }
+  
+  .mat-card_login{
+    position:absolute;
+    top: 25vh;
+    left: 85vh;
+    max-width: 25vh;
+    background-color: white;
+  }
+
+  .sub-menu-items{
+    padding:20px;
+  }

@@ -1,0 +1,20 @@
+.mat-card_login{
+    border-radius: 20px;
+}
+.mat-card-content_login{
+    border-radius: 5px;
+    padding: 20px;
+}
+.logar-centro{
+    height: 60%;
+}
+::ng-deep .mat-tab-label{
+    color: white;
+}
+::ng-deep .mat-tab-header{
+    background-color: #28282B;
+    box-shadow: 0px 17px 10px -15px #111 inset;
+} 
+::ng-deep .mat-tab-body-wrapper{
+    height: 86vh;
+}

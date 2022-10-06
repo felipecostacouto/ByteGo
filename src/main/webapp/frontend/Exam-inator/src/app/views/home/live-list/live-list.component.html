@@ -1,0 +1,49 @@
+<mat-tab-group mat-align-tabs="center" style="font-size: 1.3rem;" >   
+    <mat-tab label="Logar">
+        <div class="logar-centro" fxLayout="row" fxLayoutAlign="center center">
+            <mat-card class="mat-card_login">
+                <mat-card-content class="mat-card-content_login">
+                    <div class="login" style="width:200px;">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Usuário</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="password" style="width:200px;">
+                        <mat-form-field appearance="fill" style="width:100%;">
+                            <mat-label>Senha</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                    <button routerLink="/home"  routerLinkActive="active" mat-button style="background-color: #28282B; color:white;">
+                        
+                        Acessar o sistema <mat-icon>forward</mat-icon>
+                    </button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-tab>
+    <mat-tab label="Cadastrar">
+        <div fxLayout="row" fxLayoutAlign="center center" style="padding:2%;">
+            <div style="margin:0.5%">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>
+                            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
+                            Japan.
+                            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
+                            originally
+                            bred for hunting.
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

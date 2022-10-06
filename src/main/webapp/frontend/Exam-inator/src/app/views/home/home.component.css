@@ -1,0 +1,44 @@
+.column {
+  float:left;
+  width: 25%;
+  background-color: transparent;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+  max-width: 1200px;
+}
+
+.example-card {
+  max-width: 400px;
+}
+
+.internal-card {
+  width: 350px;
+  height: 150px;
+  background-color: rgb(180, 180, 180);
+}
+
+.internal-card-profile {
+  width: 350px;
+  height: 300px;
+  background-color: rgb(180, 180, 180);
+}
+  
+.card_header_avatar {
+  background-size: cover;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
+  float: center;
+}
