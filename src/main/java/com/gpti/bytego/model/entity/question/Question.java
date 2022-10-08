@@ -1,5 +1,6 @@
-package com.gpti.bytego.model.entity.exam;
+package com.gpti.bytego.model.entity.question;
 
+import com.gpti.bytego.model.entity.exam.Exam;
 import jakarta.persistence.*;
 
 @Entity

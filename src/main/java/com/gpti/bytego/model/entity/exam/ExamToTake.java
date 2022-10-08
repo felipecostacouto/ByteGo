@@ -1,7 +1,6 @@
 package com.gpti.bytego.model.entity.exam;
 
 import com.gpti.bytego.model.DTO.SpecificExamDTO;
-import com.gpti.bytego.model.entity.user.Student;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -16,17 +15,13 @@ public class ExamToTake implements SpecificExamInterface
     @JoinColumn(name = "examID", referencedColumnName = "ID")
     @Transient
     private Exam exam;
-    @ManyToOne
-    @JoinColumn(name = "examToTakeStudentLogin")
-    private Student student;
     @Column(name = "limitDate", nullable = false)
     private Timestamp limitDate;
 
     public ExamToTake() {}
 
-    public ExamToTake(ExamToTakePK examToTakePK, Student student, Timestamp limitDate) {
+    public ExamToTake(ExamToTakePK examToTakePK, Timestamp limitDate) {
         this.examToTakePK = examToTakePK;
-        this.student = student;
         this.limitDate = limitDate;
     }
 
@@ -62,13 +57,5 @@ public class ExamToTake implements SpecificExamInterface
 
     public void setExam(Exam exam) {
         this.exam = exam;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
     }
 }

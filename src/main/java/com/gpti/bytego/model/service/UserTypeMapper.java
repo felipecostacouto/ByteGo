@@ -1,25 +1,25 @@
 package com.gpti.bytego.model.service;
 
 import com.gpti.bytego.model.DAO.Class.ClassDao;
-import com.gpti.bytego.model.DAO.Class.ClassProfessorsDao;
-import com.gpti.bytego.model.DAO.Class.ClassStudentsDao;
+import com.gpti.bytego.model.DAO.Class.ClassProfessorDao;
+import com.gpti.bytego.model.DAO.Class.ClassStudentDao;
 import com.gpti.bytego.model.entity.user.UserType;
 
 public class UserTypeMapper
 {
-    public static SpecificUserService getUserServiceByUser(String username, UserType userType)
+    public static SpecificUserService getUserServiceByUser(UserType userType)
     {
         if (userType == UserType.STUDENT)
         {
-            return new StudentService(username);
+            return new StudentService();
         }
         else if (userType == UserType.PROFESSOR)
         {
-            return new ProfessorService(username);
+            return new ProfessorService();
         }
         else if (userType == UserType.ADMINISTRATOR)
         {
-            return new AdministratorService(username);
+            return new AdministratorService();
         }
 
         return null;
@@ -29,11 +29,11 @@ public class UserTypeMapper
     {
         if (userType == UserType.STUDENT)
         {
-            return new ClassStudentsDao();
+            return new ClassStudentDao();
         }
         else if (userType == UserType.PROFESSOR || userType == UserType.ADMINISTRATOR)
         {
-            return new ClassProfessorsDao();
+            return new ClassProfessorDao();
         }
 
         return null;

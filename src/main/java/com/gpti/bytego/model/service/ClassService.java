@@ -1,12 +1,12 @@
 package com.gpti.bytego.model.service;
 
 import com.gpti.bytego.model.DAO.Class.ClassDao;
-import com.gpti.bytego.model.DAO.Class.ClassProfessorsDao;
+import com.gpti.bytego.model.DAO.Class.ClassProfessorDao;
 import com.gpti.bytego.model.DAO.Class.ClassSubjectDao;
 import com.gpti.bytego.model.DAO.User.ProfessorDao;
 import com.gpti.bytego.model.DTO.ClassDTO;
+import com.gpti.bytego.model.DTO.UserDTO;
 import com.gpti.bytego.model.entity.classroom.ClassroomIndicator;
-import com.gpti.bytego.model.entity.user.UserType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,28 +19,27 @@ public class ClassService
         {
             String classID = "USP-EACH-" + subject + "-" + System.currentTimeMillis();
             new ClassSubjectDao().create(classID, subject);
-            new ClassProfessorsDao().create(classID, username);
+            new ClassProfessorDao().create(classID, username);
             return new ClassDTO(classID, new ArrayList<>(List.of(username)), subject, null);
         }
 
         return new ClassDTO(null, new ArrayList<>(List.of(username)), subject, null);
     }
 
-    public ArrayList<ClassDTO> getClassesByUser(String username, UserType userType)
+    public void fillClassesByUserDTO(UserDTO userDTO)
     {
-        ArrayList<ClassDTO> classDTOs = new ArrayList<>();
-        ClassDao classDao = UserTypeMapper.getClassDaoByUserType(userType);
+        userDTO.classes = new ArrayList<>();
+        ClassDao classDao = UserTypeMapper.getClassDaoByUserType(userDTO.userType);
 
-        for (ClassroomIndicator classFound : classDao.findAllByUser(username))
+        for (ClassroomIndicator classFound : classDao.findAllByUser(userDTO.login))
         {
-            classDTOs.add(new ClassDTO(
-                    classFound.getClassSubject().getClassSubjectID(),
-                    new ProfessorService(username).getAllProfessorsByClass(classFound.getClassSubject().getClassSubjectID()),
-                    classFound.getClassSubject().getSubject(),
-                    UserTypeMapper.getUserServiceByUser(username, userType).getAllExamsDTO()));
-        }
+            String classID = classFound.getClassSubject().getClassSubjectID();
+            String classSubject = classFound.getClassSubject().getSubject();
+            ArrayList<String> classProfessors = new ProfessorService().getAllProfessorsByClass(classID);
 
-        return classDTOs;
+            userDTO.classes.add(new ClassDTO(classID, classProfessors, classSubject, null));
+            new ExamService().fillExamsByUserDTO(userDTO);
+        }
     }
 
     private boolean canCreateClasses(String username)

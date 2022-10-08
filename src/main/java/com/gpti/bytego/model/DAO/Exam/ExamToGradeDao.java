@@ -14,13 +14,12 @@ import java.util.List;
 
 public class ExamToGradeDao extends GenericDao<ExamToGrade> implements SpecificExamDaoInterface
 {
-    public void create(Long examID, String professorLogin, int openQuestionsGraded)
+    public void create(Long examID, int openQuestionsGraded)
     {
         if (isDuplicatePrimaryKey(ExamToGrade.class, new ExamToGradePK(examID))) return;
         ExamToGrade examToGrade = new ExamToGrade();
         examToGrade.setExamToGradePK(new ExamToGradePK(examID));
         examToGrade.setExam(entityManager.getReference(Exam.class, examID));
-        examToGrade.setProfessor(entityManager.getReference(Professor.class, new ProfessorPK(professorLogin)));
         examToGrade.setOpenQuestionsGraded(openQuestionsGraded);
         super.create(examToGrade);
     }
@@ -29,7 +28,6 @@ public class ExamToGradeDao extends GenericDao<ExamToGrade> implements SpecificE
     {
         if (isDuplicatePrimaryKey(ExamToGrade.class, examToGrade.getExamToGradePK())) return;
         examToGrade.setExam(entityManager.getReference(Exam.class, examToGrade.getExam().getID()));
-        examToGrade.setProfessor(entityManager.getReference(Professor.class, examToGrade.getProfessor().getProfessorPK()));
         super.create(examToGrade);
     }
 
@@ -49,11 +47,11 @@ public class ExamToGradeDao extends GenericDao<ExamToGrade> implements SpecificE
     }
 
     @Override
-    public ArrayList<SpecificExamInterface> findAllExamByUserLogin(String login) {
+    public ArrayList<SpecificExamInterface> findAllByExamID(Long examID) {
         ArrayList<SpecificExamInterface> exams = new ArrayList<>();
 
         List<?> list = super.findAll(String.format(
-                        "SELECT * FROM ExamToGrade WHERE examToGradeProfessorLogin = '%s'", login),
+                        "SELECT * FROM ExamToGrade WHERE examID = %d", examID),
                 ExamToGrade.class);
         for (Object obj : list) if (obj instanceof ExamToGrade) exams.add((ExamToGrade) obj);
 

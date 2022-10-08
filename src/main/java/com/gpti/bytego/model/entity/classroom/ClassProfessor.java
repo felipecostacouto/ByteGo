@@ -4,8 +4,8 @@ import com.gpti.bytego.model.entity.user.Professor;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "ClassProfessors")
-public class ClassProfessors implements ClassroomIndicator
+@Table(name = "ClassProfessor")
+public class ClassProfessor implements ClassroomIndicator
 {
     @EmbeddedId
     private ClassProfessorsPK classProfessorsPK;
@@ -18,9 +18,9 @@ public class ClassProfessors implements ClassroomIndicator
     @Transient
     private ClassSubject classSubject;
 
-    public ClassProfessors() {}
+    public ClassProfessor() {}
 
-    public ClassProfessors(ClassProfessorsPK classProfessorsPK) {
+    public ClassProfessor(ClassProfessorsPK classProfessorsPK) {
         this.classProfessorsPK = classProfessorsPK;
     }
 

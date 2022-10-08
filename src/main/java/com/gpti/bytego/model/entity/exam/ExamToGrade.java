@@ -1,7 +1,6 @@
 package com.gpti.bytego.model.entity.exam;
 
 import com.gpti.bytego.model.DTO.SpecificExamDTO;
-import com.gpti.bytego.model.entity.user.Professor;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,17 +13,13 @@ public class ExamToGrade implements SpecificExamInterface
     @JoinColumn(name = "examID", referencedColumnName = "ID")
     @Transient
     private Exam exam;
-    @ManyToOne
-    @JoinColumn(name = "examToGradeProfessorLogin")
-    private Professor professor;
     @Column(name = "openQuestionsGraded")
     private int openQuestionsGraded;
 
     public ExamToGrade() {}
 
-    public ExamToGrade(ExamToGradePK examToGradePK, Professor professor, int openQuestionsGraded) {
+    public ExamToGrade(ExamToGradePK examToGradePK, int openQuestionsGraded) {
         this.examToGradePK = examToGradePK;
-        this.professor = professor;
         this.openQuestionsGraded = openQuestionsGraded;
     }
 
@@ -60,13 +55,5 @@ public class ExamToGrade implements SpecificExamInterface
 
     public void setExam(Exam exam) {
         this.exam = exam;
-    }
-
-    public Professor getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
     }
 }

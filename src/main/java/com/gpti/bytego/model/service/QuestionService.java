@@ -1,37 +1,56 @@
 package com.gpti.bytego.model.service;
 
-import com.gpti.bytego.model.DAO.Exam.ExamDao;
-import com.gpti.bytego.model.DAO.Exam.QuestionDao;
-import com.gpti.bytego.model.DTO.QuestionDTO;
-import com.gpti.bytego.model.entity.exam.Exam;
-import com.gpti.bytego.model.entity.exam.Question;
+import com.gpti.bytego.model.DAO.question.QuestionAlternativeDao;
+import com.gpti.bytego.model.DAO.question.QuestionDao;
+import com.gpti.bytego.model.DTO.*;
+import com.gpti.bytego.model.entity.question.Question;
+import com.gpti.bytego.model.entity.question.QuestionAlternative;
 
 import java.util.ArrayList;
 
 public class QuestionService
 {
-    private final ExamDao examDao = new ExamDao();
-
-    public ArrayList<QuestionDTO> getQuestionsDTOByExamID(Long examID)
+    public void fillQuestionsByUserDTO(UserDTO userDTO)
     {
-        Exam exam = examDao.find(examID);
-        ArrayList<QuestionDTO> questions = new ArrayList<>();
-
-        for (Question question : new QuestionDao().findAllByExamID(exam.getID()))
+        for (ClassDTO classDTO : userDTO.classes)
         {
-            questions.add(new QuestionDTO(
-                    question.getQuestionID(),
-                    question.getStatement(),
-                    question.getStatementImage(),
-                    question.getDifficulty(),
-                    question.getStudentAnswer(),
-                    question.getStudentAnswerImage(),
-                    question.getCorrectAnswer(),
-                    question.getCorrectAnswerImage(),
-                    question.getProfessorComments(),
-                    question.getScore()));
+            for (ExamDTO examDTO : classDTO.exams)
+            {
+                examDTO.questions = new ArrayList<>();
+
+                for (Question question : new QuestionDao().findAllByExamID(examDTO.ID))
+                {
+                    QuestionDTO questionDTO = new QuestionDTO(
+                            question.getQuestionID(),
+                            question.getStatement(),
+                            question.getStatementImage(),
+                            question.getDifficulty(),
+                            question.getStudentAnswer(),
+                            question.getStudentAnswerImage(),
+                            question.getCorrectAnswer(),
+                            question.getCorrectAnswerImage(),
+                            question.getProfessorComments(),
+                            question.getScore(),
+                            null
+                    );
+
+                    examDTO.questions.add(questionDTO);
+                    fillAlternativesByQuestionDTO(questionDTO);
+                }
+            }
         }
-        
-        return questions;
+    }
+
+    public void fillAlternativesByQuestionDTO(QuestionDTO questionDTO)
+    {
+        questionDTO.alternatives = new ArrayList<>();
+
+        for (QuestionAlternative questionAlternative : new QuestionAlternativeDao().findAllByQuestion(questionDTO.questionID))
+        {
+            questionDTO.alternatives.add(new QuestionAlternativeDTO(
+                    questionAlternative.getQuestionAlternativePK().getAlternative(),
+                    questionAlternative.getText(),
+                    questionAlternative.getImage()));
+        }
     }
 }

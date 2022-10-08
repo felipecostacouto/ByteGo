@@ -1,5 +1,6 @@
 package com.gpti.bytego.model.DTO;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class QuestionDTO
@@ -14,6 +15,7 @@ public class QuestionDTO
     public byte[] correctAnswerImage;
     public String professorComments;
     public Float score;
+    public ArrayList<QuestionAlternativeDTO> alternatives;
 
     public QuestionDTO(Long questionID,
                        String statement,
@@ -24,7 +26,8 @@ public class QuestionDTO
                        String correctAnswer,
                        byte[] correctAnswerImage,
                        String professorComments,
-                       Float score)
+                       Float score,
+                       ArrayList<QuestionAlternativeDTO> alternatives)
     {
         this.questionID = questionID;
         this.statement = statement;
@@ -36,6 +39,7 @@ public class QuestionDTO
         this.correctAnswerImage = correctAnswerImage;
         this.professorComments = professorComments;
         this.score = score;
+        this.alternatives = alternatives;
     }
 
     public Long getQuestionID() {
@@ -76,6 +80,10 @@ public class QuestionDTO
 
     public Float getScore() {
         return score;
+    }
+
+    public ArrayList<QuestionAlternativeDTO> getAlternatives() {
+        return alternatives;
     }
 
     public String getPrintQuestionInfo(int numberOfTags)

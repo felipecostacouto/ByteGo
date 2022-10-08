@@ -1,4 +1,14 @@
 import com.gpti.bytego.controller.LoginController;
+import com.gpti.bytego.model.DAO.Class.ClassProfessorDao;
+import com.gpti.bytego.model.DAO.Class.ClassStudentDao;
+import com.gpti.bytego.model.DAO.Class.ClassSubjectDao;
+import com.gpti.bytego.model.DAO.Exam.ExamDao;
+import com.gpti.bytego.model.DAO.Exam.ExamToTakeDao;
+import com.gpti.bytego.model.DAO.User.ProfessorDao;
+import com.gpti.bytego.model.DAO.User.StudentDao;
+import com.gpti.bytego.model.DAO.User.SystemUserDao;
+
+import java.sql.Timestamp;
 
 public class Main
 {
@@ -11,5 +21,46 @@ public class Main
         loginController.register("acabou_jessica@gmail.com", "dfbt234", null, "Jessica");
 
         System.out.println(loginController.login("fabriciokashino@live.com", "pass123"));
+
+        new SystemUserDao().create("student1@hotmail.com", "123", null);
+        new SystemUserDao().create("student2@hotmail.com", "123", null);
+        new SystemUserDao().create("student3@hotmail.com", "123", null);
+        new SystemUserDao().create("student4@hotmail.com", "123", null);
+        new SystemUserDao().create("student5@hotmail.com", "123", null);
+        new SystemUserDao().create("student6@hotmail.com", "123", null);
+
+        new SystemUserDao().create("professor1@hotmail.com", "123", null);
+        new SystemUserDao().create("professor2@hotmail.com", "123", null);
+        new SystemUserDao().create("professor3@hotmail.com", "123", null);
+
+        new StudentDao().create("student1@hotmail.com", "student1");
+        new StudentDao().create("student2@hotmail.com", "student2");
+        new StudentDao().create("student3@hotmail.com", "student3");
+        new StudentDao().create("student4@hotmail.com", "student4");
+        new StudentDao().create("student5@hotmail.com", "student5");
+        new StudentDao().create("student6@hotmail.com", "student5");
+
+        new ProfessorDao().create("professor1@hotmail.com", "professor1");
+        new ProfessorDao().create("professor2@hotmail.com", "professor2");
+        new ProfessorDao().create("professor3@hotmail.com", "professor3");
+
+        new ClassSubjectDao().create("computerID", "computer");
+        new ClassSubjectDao().create("historyID", "history");
+        new ClassProfessorDao().create("computerID", "professor1@hotmail.com");
+        new ClassStudentDao().create("computerID", "student1@hotmail.com");
+        new ClassStudentDao().create("computerID", "student2@hotmail.com");
+        new ClassStudentDao().create("computerID", "student3@hotmail.com");
+        new ClassStudentDao().create("computerID", "student4@hotmail.com");
+        new ClassStudentDao().create("computerID", "student5@hotmail.com");
+
+        new ClassStudentDao().create("historyID", "student5@hotmail.com");
+
+        new ExamDao().create("computer-P1", 123123, 12, 2, "computerID");
+        new ExamDao().create("computer-P2", 123123, 12, 2, "computerID");
+        new ExamDao().create("computer-P3", 123123, 12, 2, "computerID");
+
+        new ExamToTakeDao().create(1L, Timestamp.valueOf("2022-01-30 23:59:59"));
+        new ExamToTakeDao().create(1L, Timestamp.valueOf("2022-01-30 23:59:59"));
+        new ExamToTakeDao().create(1L, Timestamp.valueOf("2022-01-30 23:59:59"));
     }
 }

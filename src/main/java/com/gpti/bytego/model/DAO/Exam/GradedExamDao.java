@@ -6,10 +6,6 @@ import com.gpti.bytego.model.entity.exam.Exam;
 import com.gpti.bytego.model.entity.exam.GradedExam;
 import com.gpti.bytego.model.entity.exam.GradedExamPK;
 import com.gpti.bytego.model.entity.exam.SpecificExamInterface;
-import com.gpti.bytego.model.entity.user.Professor;
-import com.gpti.bytego.model.entity.user.ProfessorPK;
-import com.gpti.bytego.model.entity.user.Student;
-import com.gpti.bytego.model.entity.user.StudentPK;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -17,13 +13,11 @@ import java.util.List;
 
 public class GradedExamDao extends GenericDao<GradedExam> implements SpecificExamDaoInterface
 {
-    public void create(Long examID, String professorLogin, String studentLogin, Timestamp gradedTime, Float score)
+    public void create(Long examID, Timestamp gradedTime, Float score)
     {
         if (isDuplicatePrimaryKey(GradedExam.class, new GradedExamPK(examID))) return;
         GradedExam gradedExam = new GradedExam();
         gradedExam.setExam(entityManager.getReference(Exam.class, examID));
-        gradedExam.setProfessor(entityManager.getReference(Professor.class, new ProfessorPK(professorLogin)));
-        gradedExam.setStudent(entityManager.getReference(Student.class, new StudentPK(studentLogin)));
         gradedExam.setGradedTime(gradedTime);
         gradedExam.setScore(score);
         super.create(gradedExam);
@@ -33,8 +27,6 @@ public class GradedExamDao extends GenericDao<GradedExam> implements SpecificExa
     {
         if (isDuplicatePrimaryKey(GradedExam.class, gradedExam.getGradedExamPK())) return;
         gradedExam.setExam(entityManager.getReference(Exam.class, gradedExam.getGradedExamPK().getExamID()));
-        gradedExam.setProfessor(entityManager.getReference(Professor.class, gradedExam.getProfessor().getProfessorPK()));
-        gradedExam.setStudent(entityManager.getReference(Student.class, gradedExam.getStudent().getStudentPK()));
         super.create(gradedExam);
     }
 
@@ -54,11 +46,11 @@ public class GradedExamDao extends GenericDao<GradedExam> implements SpecificExa
     }
 
     @Override
-    public ArrayList<SpecificExamInterface> findAllExamByUserLogin(String login) {
+    public ArrayList<SpecificExamInterface> findAllByExamID(Long examID)  {
         ArrayList<SpecificExamInterface> exams = new ArrayList<>();
 
         List<?> list = super.findAll(String.format(
-                        "SELECT * FROM GradedExam WHERE gradedExamProfessorLogin = '%s'", login),
+                        "SELECT * FROM GradedExam WHERE examID = %d", examID),
                 GradedExam.class);
         for (Object obj : list) if (obj instanceof GradedExam) exams.add((GradedExam) obj);
 

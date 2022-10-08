@@ -1,39 +1,30 @@
 package com.gpti.bytego.model.service;
 
-import com.gpti.bytego.model.DAO.Class.ClassProfessorsDao;
+import com.gpti.bytego.model.DAO.Class.ClassProfessorDao;
 import com.gpti.bytego.model.DAO.Exam.ExamToGradeDao;
 import com.gpti.bytego.model.DAO.Exam.GradedExamDao;
-import com.gpti.bytego.model.DTO.ExamDTO;
-import com.gpti.bytego.model.entity.classroom.ClassProfessors;
+import com.gpti.bytego.model.DAO.Exam.SpecificExamDaoInterface;
+import com.gpti.bytego.model.entity.classroom.ClassProfessor;
 
 import java.util.ArrayList;
 
 public class ProfessorService implements SpecificUserService
 {
-    private final String login;
-    private final ExamService examToGradeService = new ExamService(new ExamToGradeDao());
-    private final ExamService gradedExamService = new ExamService(new GradedExamDao());
-
-    public ProfessorService(String login)
-    {
-        this.login = login;
-    }
-
     @Override
-    public ArrayList<ExamDTO> getAllExamsDTO()
+    public ArrayList<SpecificExamDaoInterface> getAllExamsDAOs()
     {
-        ArrayList<ExamDTO> exams = new ArrayList<>();
-        exams.addAll(examToGradeService.getAllExamDTOsByUserLogin(login));
-        exams.addAll(gradedExamService.getAllExamDTOsByUserLogin(login));
-        return exams;
+        ArrayList<SpecificExamDaoInterface> examDAOs = new ArrayList<>();
+        examDAOs.add(new ExamToGradeDao());
+        examDAOs.add(new GradedExamDao());
+        return examDAOs;
     }
 
     public ArrayList<String> getAllProfessorsByClass(String classID)
     {
-        ArrayList<ClassProfessors> classProfessors = new ClassProfessorsDao().findAllByClass(classID);
+        ArrayList<ClassProfessor> classProfessors = new ClassProfessorDao().findAllByClass(classID);
         ArrayList<String> professorLogins = new ArrayList<>();
 
-        for (ClassProfessors c : classProfessors) professorLogins.add(c.getProfessor().getName());
+        for (ClassProfessor c : classProfessors) professorLogins.add(c.getProfessor().getName());
 
         return professorLogins;
     }

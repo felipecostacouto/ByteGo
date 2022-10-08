@@ -14,13 +14,13 @@ import java.util.List;
 
 public class ExamToTakeDao extends GenericDao<ExamToTake> implements SpecificExamDaoInterface
 {
-    public void create(Long examID, String studentLogin, Timestamp limitDate)
+    public void create(Long examID, Timestamp limitDate)
     {
+        // TODO: limitDate deveria estar em uma tabela separada, pois evita que uma prova tenha data limite diferente p/ aluno diferente
         if (isDuplicatePrimaryKey(ExamToTake.class, new ExamToTakePK(examID))) return;
         ExamToTake examToTake = new ExamToTake();
         examToTake.setExamToTakePK(new ExamToTakePK(examID));
         examToTake.setExam(entityManager.getReference(Exam.class, examID));
-        examToTake.setStudent(entityManager.getReference(Student.class, new StudentPK(studentLogin)));
         examToTake.setLimitDate(limitDate);
         super.create(examToTake);
     }
@@ -29,7 +29,6 @@ public class ExamToTakeDao extends GenericDao<ExamToTake> implements SpecificExa
     {
         if (isDuplicatePrimaryKey(ExamToTake.class, examToTake.getExamToTakePK())) return;
         examToTake.setExam(entityManager.getReference(Exam.class, examToTake.getExam().getID()));
-        examToTake.setStudent(entityManager.getReference(Student.class, examToTake.getStudent().getStudentPK()));
         super.create(examToTake);
     }
 
@@ -49,11 +48,11 @@ public class ExamToTakeDao extends GenericDao<ExamToTake> implements SpecificExa
     }
 
     @Override
-    public ArrayList<SpecificExamInterface> findAllExamByUserLogin(String login) {
+    public ArrayList<SpecificExamInterface> findAllByExamID(Long examID)  {
         ArrayList<SpecificExamInterface> exams = new ArrayList<>();
 
         List<?> list = super.findAll(String.format(
-                        "SELECT * FROM ExamToTake WHERE examToTakeStudentLogin = '%s'", login),
+                        "SELECT * FROM ExamToTake WHERE examID = %d", examID),
                 ExamToTake.class);
         for (Object obj : list) if (obj instanceof ExamToTake) exams.add((ExamToTake) obj);
 

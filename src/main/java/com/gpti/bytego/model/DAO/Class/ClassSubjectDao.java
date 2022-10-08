@@ -2,11 +2,7 @@ package com.gpti.bytego.model.DAO.Class;
 
 
 import com.gpti.bytego.model.DAO.GenericDao;
-import com.gpti.bytego.model.entity.classroom.ClassProfessors;
 import com.gpti.bytego.model.entity.classroom.ClassSubject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ClassSubjectDao extends GenericDao<ClassSubject>
 {

@@ -1,8 +1,10 @@
 package com.gpti.bytego.model.service;
 
+import com.gpti.bytego.model.DAO.Exam.ExamDao;
 import com.gpti.bytego.model.DAO.Exam.SpecificExamDaoInterface;
+import com.gpti.bytego.model.DTO.ClassDTO;
 import com.gpti.bytego.model.DTO.ExamDTO;
-import com.gpti.bytego.model.DTO.QuestionDTO;
+import com.gpti.bytego.model.DTO.UserDTO;
 import com.gpti.bytego.model.entity.exam.Exam;
 import com.gpti.bytego.model.entity.exam.SpecificExamInterface;
 
@@ -10,33 +12,38 @@ import java.util.ArrayList;
 
 public class ExamService
 {
-    SpecificExamDaoInterface examDao;
-    QuestionService questionService = new QuestionService();
+    ExamDao examDao = new ExamDao();
 
-    public ExamService(SpecificExamDaoInterface examDao)
+    public void fillExamsByUserDTO(UserDTO userDTO)
     {
-        this.examDao = examDao;
-    }
-
-    ArrayList<ExamDTO> getAllExamDTOsByUserLogin(String login)
-    {
-        ArrayList<ExamDTO> examsDTOs = new ArrayList<>();
-
-        for (SpecificExamInterface exam : examDao.findAllExamByUserLogin(login))
+        for (ClassDTO classDTO : userDTO.classes)
         {
-            Exam parentExam = examDao.findParentExamByID(exam.getID());
-            ArrayList<QuestionDTO> questions = questionService.getQuestionsDTOByExamID(parentExam.getID());
+            classDTO.exams = new ArrayList<>();
+            ArrayList<Exam> exams = examDao.findAllByClassID(classDTO.classID);
+            SpecificUserService specificUserService = UserTypeMapper.getUserServiceByUser(userDTO.userType);
 
-            examsDTOs.add(new ExamDTO(
-                    parentExam.getID(),
-                    parentExam.getName(),
-                    parentExam.getTimeToDeliverInSeconds(),
-                    parentExam.getClosedQuestionsAmount(),
-                    parentExam.getOpenQuestionsAmount(),
-                    exam.getSpecificExamDTO(),
-                    questions));
+            assert specificUserService != null;
+            for (Exam exam : exams)
+            {
+                for (SpecificExamDaoInterface specificExamDao : specificUserService.getAllExamsDAOs())
+                {
+                    for (SpecificExamInterface specificExam : specificExamDao.findAllByExamID(exam.getID()))
+                    {
+                        Exam parentExam = specificExamDao.findParentExamByID(specificExam.getID());
+                        classDTO.exams.add(new ExamDTO(
+                                parentExam.getID(),
+                                parentExam.getName(),
+                                parentExam.getTimeToDeliverInSeconds(),
+                                parentExam.getClosedQuestionsAmount(),
+                                parentExam.getOpenQuestionsAmount(),
+                                specificExam.getSpecificExamDTO(),
+                                null
+                        ));
+
+                        new QuestionService().fillQuestionsByUserDTO(userDTO);
+                    }
+                }
+            }
         }
-
-        return examsDTOs;
     }
 }

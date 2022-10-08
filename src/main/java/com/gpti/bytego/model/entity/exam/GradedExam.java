@@ -1,8 +1,6 @@
 package com.gpti.bytego.model.entity.exam;
 
 import com.gpti.bytego.model.DTO.SpecificExamDTO;
-import com.gpti.bytego.model.entity.user.Professor;
-import com.gpti.bytego.model.entity.user.Student;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -17,12 +15,6 @@ public class GradedExam implements SpecificExamInterface
     @JoinColumn(name = "examID", referencedColumnName = "ID")
     @Transient
     private Exam exam;
-    @ManyToOne
-    @JoinColumn(name = "gradedExamProfessorLogin")
-    private Professor professor;
-    @ManyToOne
-    @JoinColumn(name = "doneExamStudentLogin")
-    private Student student;
     @Column(name = "gradedTime", nullable = false)
     private Timestamp gradedTime;
     @Column(name = "score", nullable = false, updatable = false)
@@ -31,10 +23,8 @@ public class GradedExam implements SpecificExamInterface
     public GradedExam() {}
 
 
-    public GradedExam(GradedExamPK gradedExamPK, Professor professor, Student student, Timestamp gradedTime, Float score) {
+    public GradedExam(GradedExamPK gradedExamPK, Timestamp gradedTime, Float score) {
         this.gradedExamPK = gradedExamPK;
-        this.professor = professor;
-        this.student = student;
         this.gradedTime = gradedTime;
         this.score = score;
     }
@@ -64,22 +54,6 @@ public class GradedExam implements SpecificExamInterface
 
     public void setExam(Exam exam) {
         this.exam = exam;
-    }
-
-    public Professor getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
     }
 
     public Timestamp getGradedTime() {

@@ -1,9 +1,9 @@
-package com.gpti.bytego.model.DAO.Exam;
+package com.gpti.bytego.model.DAO.question;
 
 
 import com.gpti.bytego.model.DAO.GenericDao;
 import com.gpti.bytego.model.entity.exam.Exam;
-import com.gpti.bytego.model.entity.exam.Question;
+import com.gpti.bytego.model.entity.question.Question;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,7 +48,7 @@ public class QuestionDao extends GenericDao<Question>
     {
         ArrayList<Question> questions = new ArrayList<>();
 
-        List list = super.findAll(String.format(
+        List<?> list = super.findAll(String.format(
                         "SELECT * FROM Question WHERE examID = %d", examID),
                 Question.class);
         for (Object obj : list) if (obj instanceof Question) questions.add((Question) obj);

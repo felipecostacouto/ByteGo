@@ -4,7 +4,7 @@ import com.gpti.bytego.model.entity.user.Student;
 import jakarta.persistence.*;
 
 @Entity
-public class ClassStudents implements ClassroomIndicator
+public class ClassStudent implements ClassroomIndicator
 {
     @EmbeddedId
     private ClassStudentsPK classStudentsPK;
@@ -17,9 +17,9 @@ public class ClassStudents implements ClassroomIndicator
     @Transient
     private ClassSubject classSubject;
 
-    public ClassStudents() {}
+    public ClassStudent() {}
 
-    public ClassStudents(ClassStudentsPK classStudentsPK) {
+    public ClassStudent(ClassStudentsPK classStudentsPK) {
         this.classStudentsPK = classStudentsPK;
     }
 

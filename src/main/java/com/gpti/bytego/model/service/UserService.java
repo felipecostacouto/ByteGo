@@ -4,23 +4,22 @@ import com.gpti.bytego.model.DAO.User.AdministratorDao;
 import com.gpti.bytego.model.DAO.User.ProfessorDao;
 import com.gpti.bytego.model.DAO.User.StudentDao;
 import com.gpti.bytego.model.DAO.User.SystemUserDao;
-import com.gpti.bytego.model.DTO.ClassDTO;
 import com.gpti.bytego.model.DTO.UserDTO;
 import com.gpti.bytego.model.entity.user.*;
-
-import java.util.ArrayList;
 
 public class UserService
 {
     public UserDTO getUserDTO(String login, String password)
     {
-        User user = findUser(login);
+        UserDTO userFound = findUser(login);
 
-        if (user != null)
+        if (userFound != null)
         {
             if (isPasswordCorrect(login, password))
             {
-                return new UserDTO(user.getName(), login, user.getUserType(), getClasses(login, user.getUserType()), password);
+                userFound.password = password;
+                fillClasses(userFound);
+                return userFound;
             }
             else
             {
@@ -33,9 +32,9 @@ public class UserService
 
     public UserDTO createNewUser(String login, String password, byte[] imageProfile, String name)
     {
-        User user = findUser(login);
+        UserDTO userFound = findUser(login);
 
-        if (user == null)
+        if (userFound == null)
         {
             new SystemUserDao().create(login, password, imageProfile);
             new StudentDao().create(login, name);
@@ -47,7 +46,7 @@ public class UserService
         }
     }
 
-    private User findUser(String username)
+    private UserDTO findUser(String username)
     {
         StudentDao studentDao = new StudentDao();
         ProfessorDao professorDao = new ProfessorDao();
@@ -63,7 +62,8 @@ public class UserService
             }
         }
 
-        return user;
+        if (user == null) return null;
+        return new UserDTO(user.getName(), username, user.getUserType(), null, null);
     }
 
     private boolean isPasswordCorrect(String username, String password)
@@ -71,8 +71,8 @@ public class UserService
         return new SystemUserDao().find(username).getPassword().equals(password);
     }
 
-    private ArrayList<ClassDTO> getClasses(String username, UserType userType)
+    private void fillClasses(UserDTO userDTO)
     {
-        return new ClassService().getClassesByUser(username, userType);
+        new ClassService().fillClassesByUserDTO(userDTO);
     }
 }

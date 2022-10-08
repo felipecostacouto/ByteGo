@@ -4,7 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 @Embeddable
 public class ClassStudentsPK implements Serializable {
@@ -50,5 +49,10 @@ public class ClassStudentsPK implements Serializable {
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[%s, %s]", classStudentLogin, classID);
     }
 }

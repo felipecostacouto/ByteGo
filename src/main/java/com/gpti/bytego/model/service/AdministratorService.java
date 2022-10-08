@@ -1,36 +1,19 @@
 package com.gpti.bytego.model.service;
 
 import com.gpti.bytego.model.DAO.Exam.ExamToGradeDao;
-import com.gpti.bytego.model.DAO.Exam.ExamToTakeDao;
 import com.gpti.bytego.model.DAO.Exam.GradedExamDao;
-import com.gpti.bytego.model.DAO.User.SystemUserDao;
-import com.gpti.bytego.model.DTO.ExamDTO;
-import com.gpti.bytego.model.entity.user.SystemUser;
+import com.gpti.bytego.model.DAO.Exam.SpecificExamDaoInterface;
 
 import java.util.ArrayList;
 
 public class AdministratorService implements SpecificUserService
 {
-    private final String login;
-
-    public AdministratorService(String login)
-    {
-        this.login = login;
-    }
-
     @Override
-    public ArrayList<ExamDTO> getAllExamsDTO()
+    public ArrayList<SpecificExamDaoInterface> getAllExamsDAOs()
     {
-        ArrayList<ExamDTO> exams = new ArrayList<>();
-        SystemUserDao systemUserDao = new SystemUserDao();
-
-        for (SystemUser systemUser : systemUserDao.findAll())
-        {
-            exams.addAll(new ExamService(new ExamToTakeDao()).getAllExamDTOsByUserLogin(systemUser.getUserLogin()));
-            exams.addAll(new ExamService(new ExamToGradeDao()).getAllExamDTOsByUserLogin(systemUser.getUserLogin()));
-            exams.addAll(new ExamService(new GradedExamDao()).getAllExamDTOsByUserLogin(systemUser.getUserLogin()));
-        }
-
-        return exams;
+        ArrayList<SpecificExamDaoInterface> examDAOs = new ArrayList<>();
+        examDAOs.add(new ExamToGradeDao());
+        examDAOs.add(new GradedExamDao());
+        return examDAOs;
     }
 }

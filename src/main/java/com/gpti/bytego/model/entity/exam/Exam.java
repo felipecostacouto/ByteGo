@@ -20,7 +20,7 @@ public class Exam
     @Column(name = "openQuestionsAmount", nullable = false)
     private int openQuestionsAmount;
     @ManyToOne
-    @JoinColumn(name = "classSubjectID")
+    @JoinColumn(name = "classID")
     private ClassSubject classID;
 
     public Exam() {}

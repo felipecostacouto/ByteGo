@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface SpecificExamDaoInterface
 {
-    ArrayList<SpecificExamInterface> findAllExamByUserLogin(String login);
+    ArrayList<SpecificExamInterface> findAllByExamID(Long examID);
 
     Exam findParentExamByID(Long examID);
 }
