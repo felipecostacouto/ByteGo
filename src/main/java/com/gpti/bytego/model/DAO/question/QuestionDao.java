@@ -62,21 +62,14 @@ public class QuestionDao extends GenericDao<Question>
                         "statement = '%s', " +
                         "statementImage = '%s', " +
                         "difficulty = %d, " +
-                        "studentAnswer = '%s', " +
-                        "studentAnswerImage = '%s', " +
                         "correctAnswer = '%s', " +
                         "correctAnswerImage = '%s', " +
-                        "professorComments = '%s', " +
-                        "score = %.2f WHERE questionID = %d",
+                        "WHERE questionID = %d",
                 question.getStatement(),
                 Arrays.toString(question.getStatementImage()),
                 question.getDifficulty(),
-                question.getStudentAnswer(),
-                Arrays.toString(question.getStudentAnswerImage()),
                 question.getCorrectAnswer(),
                 Arrays.toString(question.getCorrectAnswerImage()),
-                question.getProfessorComments(),
-                question.getScore(),
                 question.getQuestionID()));
     }
 }

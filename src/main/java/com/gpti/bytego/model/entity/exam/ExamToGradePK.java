@@ -6,7 +6,8 @@ import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
-public class ExamToGradePK implements Serializable {
+public class ExamToGradePK implements Serializable
+{
     private static final long serialVersionUID = 1050749958890792985L;
     @Column(name = "examID")
     private Long examID;

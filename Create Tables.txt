@@ -117,23 +117,43 @@ CREATE TABLE Question(
 	statement VARCHAR(500) NOT NULL,
 	statementImage BYTEA,
 	difficulty INTEGER NOT NULL,
-	studentAnswer VARCHAR(500),
-	studentAnswerImage BYTEA,
 	correctAnswer VARCHAR(500),
-    correctAnswerImage BYTEA,
-	professorComments VARCHAR(500),
-	score DECIMAL(5, 2) NOT NULL,
+    	correctAnswerImage BYTEA,
 	PRIMARY KEY(questionID),
 	FOREIGN KEY(examID) REFERENCES Exam(ID)
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE QuestionAnswer(
+	ID SERIAL NOT NULL UNIQUE,
+	login VARCHAR(50) NOT NULL,
+	alternative VARCHAR(1) NOT NULL,
+	text VARCHAR(500),
+	image BYTEA,
+	score DECIMAL(5,2),
+	questionID SERIAL NOT NULL,
+	PRIMARY KEY(login, questionID),
+	FOREIGN KEY(login) REFERENCES Student(studentLogin),
+	FOREIGN KEY(questionID) REFERENCES Question(questionID)
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 CREATE TABLE QuestionAlternative(
-    questionID SERIAL NOT NULL,
-    alternative CHAR(1) NOT NULL,
-    text VARCHAR(500),
-    image BYTEA,
-    PRIMARY KEY(questionID, alternative),
-    FOREIGN KEY(questionID) REFERENCES Question(questionID)
-    ON DELETE CASCADE ON UPDATE CASCADE
+    	questionID SERIAL NOT NULL,
+    	alternative CHAR(1) NOT NULL,
+    	text VARCHAR(500),
+    	image BYTEA,
+    	PRIMARY KEY(questionID, alternative),
+    	FOREIGN KEY(questionID) REFERENCES Question(questionID)
+    	ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE AnswerComment(
+    	answerID SERIAL NOT NULL,
+    	profLogin VARCHAR(50) NOT NULL,
+    	comment VARCHAR(500),
+    	PRIMARY KEY(answerID, profLogin),
+    	FOREIGN KEY(answerID) REFERENCES QuestionAnswer(ID),
+    	FOREIGN KEY(profLogin) REFERENCES Professor(professorLogin)
+    	ON DELETE CASCADE ON UPDATE CASCADE
 );

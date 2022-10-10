@@ -1,6 +1,7 @@
 package com.gpti.bytego.model.DAO.Class;
 
 import com.gpti.bytego.model.DAO.GenericDao;
+import com.gpti.bytego.model.DAO.User.ProfessorDao;
 import com.gpti.bytego.model.entity.classroom.ClassProfessor;
 import com.gpti.bytego.model.entity.classroom.ClassProfessorsPK;
 import com.gpti.bytego.model.entity.classroom.ClassSubject;
@@ -95,8 +96,10 @@ public class ClassProfessorDao extends GenericDao<ClassProfessor> implements Cla
         {
             if (obj instanceof ClassProfessor)
             {
-                ClassSubject classSubject = new ClassSubjectDao().find(((ClassProfessor) obj).getClassSubject().getClassSubjectID());
+                ClassSubject classSubject = new ClassSubjectDao().find(((ClassProfessor) obj).getClassProfessorsPK().getClassID());
+                Professor professor = new ProfessorDao().find(((ClassProfessor) obj).getClassProfessorsPK().getClassProfessorLogin());
                 ((ClassProfessor) obj).setClassSubject(classSubject);
+                ((ClassProfessor) obj).setProfessor(professor);
                 classes.add((ClassProfessor) obj);
             }
         }

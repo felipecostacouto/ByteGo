@@ -12,6 +12,7 @@ public class Question
     private Exam exam;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "questionID", nullable = false)
     private Long questionID;
     @Column(name = "statement", nullable = false, updatable = false, length = 500)
     private String statement;
@@ -19,18 +20,10 @@ public class Question
     private byte[] statementImage;
     @Column(name = "difficulty", nullable = false)
     private int difficulty;
-    @Column(name = "studentAnswer")
-    private String studentAnswer;
-    @Column(name = "studentAnswerImage")
-    private byte[] studentAnswerImage;
     @Column(name = "correctAnswer")
     private String correctAnswer;
     @Column(name = "correctAnswerImage")
     private byte[] correctAnswerImage;
-    @Column(name = "professorComments", length = 500)
-    private String professorComments;
-    @Column(name = "score", nullable = false, updatable = false)
-    private Float score;
 
     public Question() {}
 
@@ -83,22 +76,6 @@ public class Question
         this.difficulty = difficulty;
     }
 
-    public String getStudentAnswer() {
-        return studentAnswer;
-    }
-
-    public void setStudentAnswer(String studentAnswer) {
-        this.studentAnswer = studentAnswer;
-    }
-
-    public byte[] getStudentAnswerImage() {
-        return studentAnswerImage;
-    }
-
-    public void setStudentAnswerImage(byte[] studentAnswerImage) {
-        this.studentAnswerImage = studentAnswerImage;
-    }
-
     public String getCorrectAnswer() {
         return correctAnswer;
     }
@@ -113,21 +90,5 @@ public class Question
 
     public void setCorrectAnswerImage(byte[] correctAnswerImage) {
         this.correctAnswerImage = correctAnswerImage;
-    }
-
-    public String getProfessorComments() {
-        return professorComments;
-    }
-
-    public void setProfessorComments(String professorComments) {
-        this.professorComments = professorComments;
-    }
-
-    public Float getScore() {
-        return score;
-    }
-
-    public void setScore(Float score) {
-        this.score = score;
     }
 }

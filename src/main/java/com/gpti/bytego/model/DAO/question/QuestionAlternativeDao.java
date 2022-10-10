@@ -13,8 +13,9 @@ public class QuestionAlternativeDao extends GenericDao<QuestionAlternative>
 {
     public void create(Long questionID, char alternative, String text, byte[] image)
     {
-        QuestionAlternative questionAlternative = new QuestionAlternative();
         QuestionAlternativePK PK = new QuestionAlternativePK(entityManager.find(Question.class, questionID), alternative);
+        if (isDuplicatePrimaryKey(QuestionAlternative.class, PK)) return;
+        QuestionAlternative questionAlternative = new QuestionAlternative();
         questionAlternative.setQuestionAlternativePK(PK);
         questionAlternative.setText(text);
         questionAlternative.setImage(image);

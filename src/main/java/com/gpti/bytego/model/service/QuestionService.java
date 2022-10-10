@@ -25,17 +25,17 @@ public class QuestionService
                             question.getStatement(),
                             question.getStatementImage(),
                             question.getDifficulty(),
-                            question.getStudentAnswer(),
-                            question.getStudentAnswerImage(),
                             question.getCorrectAnswer(),
                             question.getCorrectAnswerImage(),
-                            question.getProfessorComments(),
-                            question.getScore(),
+                            null,
+                            null,
                             null
                     );
 
                     examDTO.questions.add(questionDTO);
                     fillAlternativesByQuestionDTO(questionDTO);
+                    fillAnswerByQuestionDTO(questionDTO);
+                    fillCommentByQuestionDTO(questionDTO);
                 }
             }
         }
@@ -45,12 +45,22 @@ public class QuestionService
     {
         questionDTO.alternatives = new ArrayList<>();
 
-        for (QuestionAlternative questionAlternative : new QuestionAlternativeDao().findAllByQuestion(questionDTO.questionID))
+        for (QuestionAlternative alternative : new QuestionAlternativeDao().findAllByQuestion(questionDTO.questionID))
         {
             questionDTO.alternatives.add(new QuestionAlternativeDTO(
-                    questionAlternative.getQuestionAlternativePK().getAlternative(),
-                    questionAlternative.getText(),
-                    questionAlternative.getImage()));
+                    alternative.getQuestionAlternativePK().getAlternative(),
+                    alternative.getText(),
+                    alternative.getImage()));
         }
+    }
+
+    public void fillAnswerByQuestionDTO(QuestionDTO questionDTO)
+    {
+
+    }
+
+    public void fillCommentByQuestionDTO(QuestionDTO questionDTO)
+    {
+
     }
 }

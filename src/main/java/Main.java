@@ -7,6 +7,10 @@ import com.gpti.bytego.model.DAO.Exam.ExamToTakeDao;
 import com.gpti.bytego.model.DAO.User.ProfessorDao;
 import com.gpti.bytego.model.DAO.User.StudentDao;
 import com.gpti.bytego.model.DAO.User.SystemUserDao;
+import com.gpti.bytego.model.DAO.question.AnswerCommentDao;
+import com.gpti.bytego.model.DAO.question.QuestionAlternativeDao;
+import com.gpti.bytego.model.DAO.question.QuestionAnswerDao;
+import com.gpti.bytego.model.DAO.question.QuestionDao;
 
 import java.sql.Timestamp;
 
@@ -20,7 +24,7 @@ public class Main
         loginController.register("maria.florentina@hotmail.com", "f09fu21", null, "Maria");
         loginController.register("acabou_jessica@gmail.com", "dfbt234", null, "Jessica");
 
-        System.out.println(loginController.login("fabriciokashino@live.com", "pass123"));
+        System.out.println(loginController.login("student1@hotmail.com", "123"));
 
         new SystemUserDao().create("student1@hotmail.com", "123", null);
         new SystemUserDao().create("student2@hotmail.com", "123", null);
@@ -60,7 +64,22 @@ public class Main
         new ExamDao().create("computer-P3", 123123, 12, 2, "computerID");
 
         new ExamToTakeDao().create(1L, Timestamp.valueOf("2022-01-30 23:59:59"));
-        new ExamToTakeDao().create(1L, Timestamp.valueOf("2022-01-30 23:59:59"));
-        new ExamToTakeDao().create(1L, Timestamp.valueOf("2022-01-30 23:59:59"));
+        new ExamToTakeDao().create(2L, Timestamp.valueOf("2022-01-30 23:59:59"));
+        new ExamToTakeDao().create(3L, Timestamp.valueOf("2022-01-30 23:59:59"));
+
+        new QuestionDao().create(1L, "Seja a funcao y = 2x. Enconter o valor de x que zera a funcao.", null, 20, "0",null);
+        new QuestionDao().create(1L, "Seja a funcao y = 2x. 345345435345345345.", null, 20, "0",null);
+        new QuestionDao().create(1L, "Seja a funcao y = 2x. E34534543543.", null, 20, "0",null);
+
+        new QuestionDao().create(2L, "Seja a funcao y = 2x. Enconter o valor de x que zera a funcao.", null, 20, "0",null);
+        new QuestionDao().create(2L, "Seja a funcao y = 2x. 345345435345345345.", null, 20, "0",null);
+        new QuestionDao().create(2L, "Seja a funcao y = 2x. E34534543543.", null, 20, "0",null);
+
+        new QuestionAlternativeDao().create(1L, 'a', "adasd", null);
+        new QuestionAlternativeDao().create(1L, 'b', "adasd", null);
+        new QuestionAlternativeDao().create(1L, 'c', "adasd", null);
+
+        new QuestionAnswerDao().create("student1@hotmail.com", 'a', null, null, 0, 1L);
+        new AnswerCommentDao().create(-1248488439L, "professor1@hotmail.com", "ótimo!");
     }
 }
