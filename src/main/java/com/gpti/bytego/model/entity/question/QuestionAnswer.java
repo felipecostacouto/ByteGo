@@ -1,9 +1,8 @@
 package com.gpti.bytego.model.entity.question;
 
+import com.gpti.bytego.model.entity.user.Professor;
 import com.gpti.bytego.model.entity.user.Student;
 import jakarta.persistence.*;
-
-import java.util.UUID;
 
 @Entity
 @Table(name = "QuestionAnswer")
@@ -11,16 +10,17 @@ public class QuestionAnswer
 {
     @EmbeddedId
     private QuestionAnswerPK questionAnswerPK;
-    @MapsId(value = "login")
-    @JoinColumn(name = "login", referencedColumnName = "studentLogin")
+    @MapsId(value = "studentLogin")
+    @JoinColumn(name = "studentLogin", referencedColumnName = "studentLogin")
     @Transient
     private Student student;
     @MapsId(value = "questionID")
     @JoinColumn(name = "questionID", referencedColumnName = "questionID")
     @Transient
     private Question question;
-    @Column(name = "ID", nullable = false, updatable = false)
-    private Long ID;
+    @ManyToOne
+    @JoinColumn(name = "professorLogin")
+    private Professor professor;
     @Column(name = "alternative", updatable = false, length = 1)
     private char alternative;
     @Column(name = "text", updatable = false, length = 500)
@@ -29,20 +29,20 @@ public class QuestionAnswer
     private byte[] image;
     @Column(name = "score")
     private float score;
+    @Column(name = "comment")
+    private String comment;
 
-    public QuestionAnswer(QuestionAnswerPK questionAnswerPK, char alternative, String text, byte[] image, float score) {
-        this.ID = (long)((int)UUID.randomUUID().getLeastSignificantBits());
+    public QuestionAnswer(QuestionAnswerPK questionAnswerPK, Professor professor, char alternative, String text, byte[] image, float score, String comment) {
         this.questionAnswerPK = questionAnswerPK;
+        this.professor = professor;
         this.alternative = alternative;
         this.text = text;
         this.image = image;
         this.score = score;
+        this.comment = comment;
     }
 
-    public QuestionAnswer()
-    {
-        this.ID = (long)((int)UUID.randomUUID().getLeastSignificantBits());
-    }
+    public QuestionAnswer() {}
 
     public QuestionAnswerPK getQuestionAnswerPK() {
         return questionAnswerPK;
@@ -68,12 +68,12 @@ public class QuestionAnswer
         this.question = question;
     }
 
-    public Long getID() {
-        return ID;
+    public Professor getProfessor() {
+        return professor;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
     public char getAlternative() {
@@ -106,5 +106,13 @@ public class QuestionAnswer
 
     public void setScore(float score) {
         this.score = score;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

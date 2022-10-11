@@ -13,7 +13,6 @@ public class QuestionDTO
     public byte[] correctAnswerImage;
     public ArrayList<QuestionAlternativeDTO> alternatives;
     public QuestionAnswerDTO answer;
-    public AnswerCommentDTO comment;
 
     public QuestionDTO(Long questionID,
                        String statement,
@@ -22,8 +21,7 @@ public class QuestionDTO
                        String correctAnswer,
                        byte[] correctAnswerImage,
                        ArrayList<QuestionAlternativeDTO> alternatives,
-                       QuestionAnswerDTO answer,
-                       AnswerCommentDTO comment)
+                       QuestionAnswerDTO answer)
     {
         this.questionID = questionID;
         this.statement = statement;
@@ -33,11 +31,6 @@ public class QuestionDTO
         this.correctAnswerImage = correctAnswerImage;
         this.alternatives = alternatives;
         this.answer = answer;
-        this.comment = comment;
-    }
-
-    public AnswerCommentDTO getComment() {
-        return comment;
     }
 
     public QuestionAnswerDTO getAnswer() {

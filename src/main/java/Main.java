@@ -7,7 +7,6 @@ import com.gpti.bytego.model.DAO.Exam.ExamToTakeDao;
 import com.gpti.bytego.model.DAO.User.ProfessorDao;
 import com.gpti.bytego.model.DAO.User.StudentDao;
 import com.gpti.bytego.model.DAO.User.SystemUserDao;
-import com.gpti.bytego.model.DAO.question.AnswerCommentDao;
 import com.gpti.bytego.model.DAO.question.QuestionAlternativeDao;
 import com.gpti.bytego.model.DAO.question.QuestionAnswerDao;
 import com.gpti.bytego.model.DAO.question.QuestionDao;
@@ -79,7 +78,6 @@ public class Main
         new QuestionAlternativeDao().create(1L, 'b', "adasd", null);
         new QuestionAlternativeDao().create(1L, 'c', "adasd", null);
 
-        new QuestionAnswerDao().create("student1@hotmail.com", 'a', null, null, 0, 1L);
-        new AnswerCommentDao().create(-1248488439L, "professor1@hotmail.com", "ótimo!");
+        new QuestionAnswerDao().create("student1@hotmail.com", 'a', null, null, 0, 1L, "sadasda", "professor1@hotmail.com");
     }
 }

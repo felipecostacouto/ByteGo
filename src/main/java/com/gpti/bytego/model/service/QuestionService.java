@@ -1,12 +1,17 @@
 package com.gpti.bytego.model.service;
 
+import com.gpti.bytego.model.DAO.Class.ClassProfessorDao;
 import com.gpti.bytego.model.DAO.question.QuestionAlternativeDao;
+import com.gpti.bytego.model.DAO.question.QuestionAnswerDao;
 import com.gpti.bytego.model.DAO.question.QuestionDao;
 import com.gpti.bytego.model.DTO.*;
+import com.gpti.bytego.model.entity.classroom.ClassroomIndicator;
 import com.gpti.bytego.model.entity.question.Question;
 import com.gpti.bytego.model.entity.question.QuestionAlternative;
+import com.gpti.bytego.model.entity.question.QuestionAnswer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionService
 {
@@ -28,14 +33,12 @@ public class QuestionService
                             question.getCorrectAnswer(),
                             question.getCorrectAnswerImage(),
                             null,
-                            null,
                             null
                     );
 
                     examDTO.questions.add(questionDTO);
                     fillAlternativesByQuestionDTO(questionDTO);
-                    fillAnswerByQuestionDTO(questionDTO);
-                    fillCommentByQuestionDTO(questionDTO);
+                    fillAnswerByUserDTO(questionDTO, userDTO, classDTO.getProfessorsLogins());
                 }
             }
         }
@@ -54,13 +57,24 @@ public class QuestionService
         }
     }
 
-    public void fillAnswerByQuestionDTO(QuestionDTO questionDTO)
+    public void fillAnswerByUserDTO(QuestionDTO questionDTO, UserDTO userDTO, List<String> professorLogins)
     {
-
-    }
-
-    public void fillCommentByQuestionDTO(QuestionDTO questionDTO)
-    {
-
+        for (String profLogin : professorLogins)
+        {
+            QuestionAnswer questionAnswer = new QuestionAnswerDao().find(userDTO.login, questionDTO.questionID, profLogin);
+            if (questionAnswer != null && questionAnswer.getProfessor() != null)
+            {
+                questionDTO.answer = new QuestionAnswerDTO(
+                        questionAnswer.getStudent().getStudentPK().getStudentLogin(),
+                        questionAnswer.getAlternative(),
+                        questionAnswer.getText(),
+                        questionAnswer.getImage(),
+                        questionAnswer.getScore(),
+                        questionDTO.getQuestionID(),
+                        questionAnswer.getComment(),
+                        questionAnswer.getProfessor().getProfessorPK().getProfessorLogin());
+                break;
+            }
+        }
     }
 }

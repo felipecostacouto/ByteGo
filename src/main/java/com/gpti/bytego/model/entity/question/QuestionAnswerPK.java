@@ -9,26 +9,24 @@ import java.io.Serializable;
 public class QuestionAnswerPK implements Serializable
 {
     private static final long serialVersionUID = 5575543332914752612L;
-    @Column(name = "login")
-    private String login;
+    @Column(name = "studentLogin")
+    private String studentLogin;
     @Column(name = "questionID")
     private Long questionID;
 
-    public QuestionAnswerPK(String login, Long questionID) {
-        this.login = login;
+    public QuestionAnswerPK(String studentLogin, Long questionID) {
+        this.studentLogin = studentLogin;
         this.questionID = questionID;
     }
 
-    public QuestionAnswerPK() {
+    public QuestionAnswerPK() {}
 
+    public String getStudentLogin() {
+        return studentLogin;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+    public void setStudentLogin(String studentLogin) {
+        this.studentLogin = studentLogin;
     }
 
     public Long getQuestionID() {

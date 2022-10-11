@@ -2,31 +2,33 @@ package com.gpti.bytego.model.DTO;
 
 public class QuestionAnswerDTO
 {
-    public Long ID;
     public String studentLogin;
     public char alternative;
     public String text;
     public byte[] image;
     public float score;
+    public Long questionID;
+    public String comment;
+    public String professorLogin;
 
     public QuestionAnswerDTO(
-            Long ID,
             String studentLogin,
             char alternative,
             String text,
             byte[] image,
-            float score)
+            float score,
+            Long questionID,
+            String comment,
+            String professorLogin)
     {
-        this.ID = ID;
         this.studentLogin = studentLogin;
         this.alternative = alternative;
         this.text = text;
         this.image = image;
         this.score = score;
-    }
-
-    public Long getID() {
-        return ID;
+        this.questionID = questionID;
+        this.comment = comment;
+        this.professorLogin = professorLogin;
     }
 
     public String getStudentLogin() {
@@ -47,5 +49,17 @@ public class QuestionAnswerDTO
 
     public float getScore() {
         return score;
+    }
+
+    public Long getQuestionID() {
+        return questionID;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public String getProfessorLogin() {
+        return professorLogin;
     }
 }
