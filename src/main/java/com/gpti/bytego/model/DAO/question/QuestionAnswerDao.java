@@ -1,9 +1,8 @@
 package com.gpti.bytego.model.DAO.question;
 
 import com.gpti.bytego.model.DAO.GenericDao;
+import com.gpti.bytego.model.DAO.User.ProfessorDao;
 import com.gpti.bytego.model.entity.question.*;
-import com.gpti.bytego.model.entity.user.Professor;
-import com.gpti.bytego.model.entity.user.ProfessorPK;
 import com.gpti.bytego.model.entity.user.Student;
 import com.gpti.bytego.model.entity.user.StudentPK;
 
@@ -13,6 +12,7 @@ public class QuestionAnswerDao extends GenericDao<QuestionAnswer>
     {
         QuestionAnswerPK PK = new QuestionAnswerPK(studentLogin, questionID);
         if (isDuplicatePrimaryKey(QuestionAnswer.class, PK)) return;
+        if (new ProfessorDao().find(professorLogin) == null) return; // TODO: Informar ausência de foreign key
         QuestionAnswer questionAnswer = new QuestionAnswer();
         questionAnswer.setQuestionAnswerPK(PK);
         questionAnswer.setStudent(entityManager.getReference(Student.class, new StudentPK(studentLogin)));
@@ -22,7 +22,7 @@ public class QuestionAnswerDao extends GenericDao<QuestionAnswer>
         questionAnswer.setScore(score);
         questionAnswer.setQuestion(entityManager.getReference(Question.class, questionID));
         questionAnswer.setComment(comment);
-        questionAnswer.setProfessor(entityManager.getReference(Professor.class, new ProfessorPK(professorLogin)));
+        questionAnswer.setProfessor(professorLogin);
         super.create(questionAnswer);
     }
 
@@ -31,7 +31,6 @@ public class QuestionAnswerDao extends GenericDao<QuestionAnswer>
         if (isDuplicatePrimaryKey(QuestionAnswer.class, questionAnswer.getQuestionAnswerPK())) return;
         questionAnswer.setStudent(entityManager.getReference(Student.class, questionAnswer.getQuestionAnswerPK().getStudentLogin()));
         questionAnswer.setQuestion(entityManager.getReference(Question.class, questionAnswer.getQuestionAnswerPK().getQuestionID()));
-        questionAnswer.setProfessor(entityManager.getReference(Professor.class, questionAnswer.getProfessor().getProfessorPK()));
         super.create(questionAnswer);
     }
 
@@ -45,13 +44,13 @@ public class QuestionAnswerDao extends GenericDao<QuestionAnswer>
         super.remove(QuestionAnswer.class, questionAnswer.getQuestionAnswerPK());
     }
 
-    public QuestionAnswer find(String studentLogin, Long questionID, String professorLogin)
+    public QuestionAnswer find(String studentLogin, Long questionID)
     {
         QuestionAnswer questionAnswer = super.find(QuestionAnswer.class, new QuestionAnswerPK(studentLogin, questionID));
         if (questionAnswer != null)
         {
             questionAnswer.setStudent(entityManager.getReference(Student.class, new StudentPK(studentLogin)));
-            questionAnswer.setProfessor(entityManager.getReference(Professor.class, new ProfessorPK(professorLogin)));
+            questionAnswer.setQuestion(entityManager.getReference(Question.class, questionID));
         }
         return questionAnswer;
     }

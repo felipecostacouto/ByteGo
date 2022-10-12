@@ -1,6 +1,5 @@
 package com.gpti.bytego.model.entity.question;
 
-import com.gpti.bytego.model.entity.user.Professor;
 import com.gpti.bytego.model.entity.user.Student;
 import jakarta.persistence.*;
 
@@ -18,9 +17,8 @@ public class QuestionAnswer
     @JoinColumn(name = "questionID", referencedColumnName = "questionID")
     @Transient
     private Question question;
-    @ManyToOne
-    @JoinColumn(name = "professorLogin")
-    private Professor professor;
+    @Column(name = "professorLogin", updatable = false, length = 1)
+    private String professorLogin;
     @Column(name = "alternative", updatable = false, length = 1)
     private char alternative;
     @Column(name = "text", updatable = false, length = 500)
@@ -32,9 +30,9 @@ public class QuestionAnswer
     @Column(name = "comment")
     private String comment;
 
-    public QuestionAnswer(QuestionAnswerPK questionAnswerPK, Professor professor, char alternative, String text, byte[] image, float score, String comment) {
+    public QuestionAnswer(QuestionAnswerPK questionAnswerPK, String professorLogin, char alternative, String text, byte[] image, float score, String comment) {
         this.questionAnswerPK = questionAnswerPK;
-        this.professor = professor;
+        this.professorLogin = professorLogin;
         this.alternative = alternative;
         this.text = text;
         this.image = image;
@@ -68,12 +66,12 @@ public class QuestionAnswer
         this.question = question;
     }
 
-    public Professor getProfessor() {
-        return professor;
+    public String getProfessor() {
+        return professorLogin;
     }
 
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
+    public void setProfessor(String professorLogin) {
+        this.professorLogin = professorLogin;
     }
 
     public char getAlternative() {

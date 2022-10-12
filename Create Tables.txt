@@ -135,8 +135,7 @@ CREATE TABLE QuestionAnswer(
 	professorLogin VARCHAR(50) NOT NULL,
 	PRIMARY KEY(studentLogin, questionID),
 	FOREIGN KEY(studentLogin) REFERENCES Student(studentLogin),
-	FOREIGN KEY(questionID) REFERENCES Question(questionID),
-	FOREIGN KEY(professorLogin) REFERENCES Professor(professorLogin)
+	FOREIGN KEY(questionID) REFERENCES Question(questionID)
 	ON DELETE CASCADE ON UPDATE CASCADE
 );
 

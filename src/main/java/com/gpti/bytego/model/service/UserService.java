@@ -73,6 +73,6 @@ public class UserService
 
     private void fillClasses(UserDTO userDTO)
     {
-        new ClassService().fillClassesByUserDTO(userDTO);
+        new ClassService().fillUserWithClasses(userDTO);
     }
 }

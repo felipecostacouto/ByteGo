@@ -26,7 +26,7 @@ public class ClassService
         return new ClassDTO(null, new ArrayList<>(List.of(username)), subject, null);
     }
 
-    public void fillClassesByUserDTO(UserDTO userDTO)
+    public void fillUserWithClasses(UserDTO userDTO)
     {
         userDTO.classes = new ArrayList<>();
         ClassDao classDao = UserTypeMapper.getClassDaoByUserType(userDTO.userType);
@@ -37,8 +37,10 @@ public class ClassService
             String classSubject = classFound.getClassSubject().getSubject();
             ArrayList<String> classProfessors = new ProfessorService().getAllProfessorsByClass(classID);
 
-            userDTO.classes.add(new ClassDTO(classID, classProfessors, classSubject, null));
-            new ExamService().fillExamsByUserDTO(userDTO);
+            ClassDTO classDTO = new ClassDTO(classID, classProfessors, classSubject, null);
+            userDTO.classes.add(classDTO);
+
+            new ExamService().fillClassWithExams(classDTO, userDTO.userType, userDTO.login);
         }
     }
 
