@@ -2,6 +2,7 @@ package com.gpti.bytego.model.DTO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 
 public class QuestionDTO
 {
@@ -13,6 +14,7 @@ public class QuestionDTO
     public byte[] correctAnswerImage;
     public ArrayList<QuestionAlternativeDTO> alternatives;
     public QuestionAnswerDTO answer;
+    public Set<String> subjectTags;
 
     public QuestionDTO(Long questionID,
                        String statement,
@@ -21,7 +23,8 @@ public class QuestionDTO
                        String correctAnswer,
                        byte[] correctAnswerImage,
                        ArrayList<QuestionAlternativeDTO> alternatives,
-                       QuestionAnswerDTO answer)
+                       QuestionAnswerDTO answer,
+                       Set<String> subjectTags)
     {
         this.questionID = questionID;
         this.statement = statement;
@@ -31,6 +34,11 @@ public class QuestionDTO
         this.correctAnswerImage = correctAnswerImage;
         this.alternatives = alternatives;
         this.answer = answer;
+        this.subjectTags = subjectTags;
+    }
+
+    public Set<String> getSubjectTags() {
+        return subjectTags;
     }
 
     public QuestionAnswerDTO getAnswer() {

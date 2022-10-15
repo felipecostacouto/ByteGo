@@ -4,6 +4,7 @@ import com.gpti.bytego.model.DAO.Exam.ExamDao;
 import com.gpti.bytego.model.DAO.Exam.SpecificExamDaoInterface;
 import com.gpti.bytego.model.DTO.ClassDTO;
 import com.gpti.bytego.model.DTO.ExamDTO;
+import com.gpti.bytego.model.DTO.QuestionDTO;
 import com.gpti.bytego.model.entity.exam.Exam;
 import com.gpti.bytego.model.entity.exam.SpecificExamInterface;
 import com.gpti.bytego.model.entity.user.UserType;
@@ -37,11 +38,25 @@ public class ExamService
                             specificExam.getSpecificExamDTO(),
                             null
                     );
-                    classDTO.exams.add(examDTO);
 
-                    new QuestionService().fillExamWithQuestions(examDTO, studentLogin);
+                    classDTO.exams.add(examDTO);
+                    fillExamWithQuestions(examDTO, studentLogin);
                 }
             }
+        }
+    }
+
+    private void fillExamWithQuestions(ExamDTO examDTO, String studentLogin)
+    {
+        new ExamQuestionMapService().fillExamWithQuestions(examDTO);
+
+        QuestionService questionService = new QuestionService();
+        AnswerService answerService = new AnswerService();
+
+        for (QuestionDTO questionDTO : examDTO.questions)
+        {
+            questionService.fillQuestionWithAlternatives(questionDTO);
+            answerService.fillQuestionWithAnswer(questionDTO, studentLogin);
         }
     }
 }

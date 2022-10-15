@@ -2,16 +2,14 @@ package com.gpti.bytego.model.DAO.question;
 
 
 import com.gpti.bytego.model.DAO.GenericDao;
-import com.gpti.bytego.model.entity.exam.Exam;
 import com.gpti.bytego.model.entity.question.Question;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 public class QuestionDao extends GenericDao<Question>
 {
-    public void create(Long examID, String statement, byte[] statementImage, int difficulty, String correctAnswer, byte[] correctAnswerImage)
+    public void create(String statement, byte[] statementImage, int difficulty, String correctAnswer, byte[] correctAnswerImage, Set<String> subjectTags)
     {
         Question question = new Question();
         question.setStatement(statement);
@@ -19,13 +17,12 @@ public class QuestionDao extends GenericDao<Question>
         question.setDifficulty(difficulty);
         question.setCorrectAnswer(correctAnswer);
         question.setCorrectAnswerImage(correctAnswerImage);
-        question.setExam(entityManager.getReference(Exam.class, examID));
+        question.setSubjectTags(subjectTags);
         super.create(question);
     }
 
     public void create(Question question)
     {
-        question.setExam(entityManager.getReference(Exam.class, question.getExam().getID()));
         super.create(question);
     }
 
@@ -42,18 +39,6 @@ public class QuestionDao extends GenericDao<Question>
     public Question find(Long questionID)
     {
         return super.find(Question.class, questionID);
-    }
-
-    public ArrayList<Question> findAllByExamID(Long examID)
-    {
-        ArrayList<Question> questions = new ArrayList<>();
-
-        List<?> list = super.findAll(String.format(
-                        "SELECT * FROM Question WHERE examID = %d", examID),
-                Question.class);
-        for (Object obj : list) if (obj instanceof Question) questions.add((Question) obj);
-
-        return questions;
     }
 
     public void update(Question question)

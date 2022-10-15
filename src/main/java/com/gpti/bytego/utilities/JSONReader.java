@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class JSONReader
 {
-    public static JSONObject readJsonReceived(HttpServletRequest request)
+    public static JSONObject readJsonFromRequest(HttpServletRequest request)
     {
         JSONObject jsonObject = null;
 

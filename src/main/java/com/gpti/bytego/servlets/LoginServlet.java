@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("application/json");
-        JSONObject jsonObject = JSONReader.readJsonReceived(req);
+        JSONObject jsonObject = JSONReader.readJsonFromRequest(req);
 
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("application/json");
-        JSONObject jsonObject = JSONReader.readJsonReceived(req);
+        JSONObject jsonObject = JSONReader.readJsonFromRequest(req);
 
         PrintWriter out = resp.getWriter();
         out.println(jsonObject);

@@ -112,14 +112,21 @@ CREATE TABLE Rules(
 );
 
 CREATE TABLE Question(
-	examID SERIAL NOT NULL,
 	questionID SERIAL NOT NULL,
 	statement VARCHAR(500) NOT NULL,
 	statementImage BYTEA,
 	difficulty INTEGER NOT NULL,
 	correctAnswer VARCHAR(500),
-    	correctAnswerImage BYTEA,
-	PRIMARY KEY(questionID),
+    correctAnswerImage BYTEA,
+    subjectTags TEXT[],
+	PRIMARY KEY(questionID)
+);
+
+CREATE TABLE ExamQuestionMap(
+	questionID SERIAL NOT NULL,
+	examID SERIAL NOT NULL,
+	PRIMARY KEY(questionID, examID),
+	FOREIGN KEY(questionID) REFERENCES Question(questionID),
 	FOREIGN KEY(examID) REFERENCES Exam(ID)
 	ON DELETE CASCADE ON UPDATE CASCADE
 );

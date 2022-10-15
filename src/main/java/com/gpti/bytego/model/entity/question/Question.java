@@ -1,15 +1,15 @@
 package com.gpti.bytego.model.entity.question;
 
-import com.gpti.bytego.model.entity.exam.Exam;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Question")
 public class Question
 {
-    @ManyToOne
-    @JoinColumn(name = "examID")
-    private Exam exam;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "questionID", nullable = false)
@@ -24,24 +24,27 @@ public class Question
     private String correctAnswer;
     @Column(name = "correctAnswerImage")
     private byte[] correctAnswerImage;
+    @Column(name = "subjectTags")
+    @ElementCollection
+    private Set<String> subjectTags = new HashSet<>();
 
     public Question() {}
 
-    public Question(Exam exam, String statement, byte[] statementImage, int difficulty, String correctAnswer, byte[] correctAnswerImage) {
-        this.exam = exam;
+    public Question(String statement, byte[] statementImage, int difficulty, String correctAnswer, byte[] correctAnswerImage, Set<String> subjectTags) {
         this.statement = statement;
         this.statementImage = statementImage;
         this.difficulty = difficulty;
         this.correctAnswer = correctAnswer;
         this.correctAnswerImage = correctAnswerImage;
+        this.subjectTags = subjectTags;
     }
 
-    public Exam getExam() {
-        return exam;
+    public Set<String> getSubjectTags() {
+        return subjectTags;
     }
 
-    public void setExam(Exam exam) {
-        this.exam = exam;
+    public void setSubjectTags(Set<String> subjectTags) {
+        this.subjectTags = subjectTags;
     }
 
     public Long getQuestionID() {
