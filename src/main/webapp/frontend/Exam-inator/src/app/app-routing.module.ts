@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'live-list', component: LiveListComponent },
   { path: 'take-exam', component: TakeExamComponent},
   { path: '**', component: PageNotFoundComponent }
-  
+
 ];
 
 @NgModule({

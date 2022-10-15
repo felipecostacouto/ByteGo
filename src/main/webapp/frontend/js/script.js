@@ -5,7 +5,7 @@ var submit_button = document.getElementById("login_submit");
 my_header.addEventListener('click', my_function);
 submit_button.addEventListener('click', loginSumitClicked);
 
-function loginSumitClicked() {
+function loginSumitClicked2() {
     var loginText = document.getElementById("login_form_user").value;
     var passwordText = document.getElementById("login_form_password").value;
     var url = 'http://localhost:8080/Login?username=' + loginText + '&password=' + passwordText;
@@ -13,6 +13,39 @@ function loginSumitClicked() {
     my_text.textContent = "Executando requisição para servidor..."
     fetch(url, {
         method: "GET"
+    }).then(function (response) {
+        console.log(response.ok);
+        return response.json();
+    }).then(function (data) {
+        useBody(data);
+    })["catch"](function (error) {
+        alert("ERROOO");
+        console.log(error);
+    });
+}
+
+function loginSumitClicked() {
+    var url = 'http://localhost:8080/Login'
+
+    my_text.textContent = "Executando requisição para servidor..."
+
+    const jsonObject = {
+        name: 'asdasodias',
+        login: 'asdasdioa@hotmail.com',
+        exam: 123123,
+        myList: [
+            'first',
+            'second',
+            'third'
+        ]
+    }
+
+    fetch(url, {
+        method: "POST",
+        body: JSON.stringify(jsonObject),
+        headers: {
+            'Content-Type': 'application/json',
+        }
     }).then(function (response) {
         console.log(response.ok);
         return response.json();
